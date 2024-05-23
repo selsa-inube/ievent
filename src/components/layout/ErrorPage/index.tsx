@@ -1,13 +1,15 @@
-import { StyledCompanyLogo, StyledErrorImage } from "./styles";
-import { MdChevronLeft } from "react-icons/md";
 
-import selsaLogo from "@assets/selsa.png";
-import errorImage from "@assets/timeout.png";
+import { MdChevronLeft } from "react-icons/md";
 import { Grid } from "@inubekit/grid";
 import { Stack } from "@inubekit/stack";
 import { Text } from "@inubekit/text";
 import { Button } from "@inubekit/button";
 import { useMediaQueries } from "@inubekit/hooks";
+
+import selsaLogo from "@assets/selsa.png";
+import errorImage from "@assets/timeout.png";
+
+import { StyledCompanyLogo, StyledErrorImage } from "./styles";
 
 interface ErrorPageProps {
   logo?: string;

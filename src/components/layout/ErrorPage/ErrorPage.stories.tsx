@@ -1,7 +1,9 @@
-import { ErrorPage, ErrorPageProps } from "./index";
+import { Meta } from "@storybook/react";
+
 import selsaLogo from "@assets/selsa.png";
 import errorImage from "@assets/timeout.png";
-import { Meta } from "@storybook/react";
+
+import { ErrorPage, ErrorPageProps } from "./index";
 
 
 const meta: Meta<typeof ErrorPage> = {
