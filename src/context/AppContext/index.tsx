@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 
 import { usersMock } from "@src/mocks/users/users";
-import linparLogo from "@assets/images/linpar.png";
+import linparLogo from "@assets/linpar.png";
 
 import { AppContextProviderProps, IAppContext, IClient } from "./types";
 
