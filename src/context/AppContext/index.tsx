@@ -1,9 +1,9 @@
 import { createContext, useEffect, useState } from "react";
 
-import { usersMock } from "@src/mocks/users/users";
 import linparLogo from "@assets/linpar.png";
 
 import { AppContextProviderProps, IAppContext, IClient } from "./types";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const AppContext = createContext<IAppContext>({
   user: { username: "", id: "", company: "", operator: { name: "", logo: "" } },
@@ -20,17 +20,19 @@ export default function AppContextProvider(props: AppContextProviderProps) {
     const { sigla } = client;
     setClientSigla(sigla);
   }
-  const { firstName, firstLastName } = usersMock;
-  const company = clientSigla;
+
+  const { user } = useAuth0();
 
   useEffect(() => {
     localStorage.setItem("clientSigla", clientSigla);
   }, [clientSigla]);
 
- 
-  const userContext: IAppContext = {
+  
+  const company = clientSigla;
+
+   const userContext: IAppContext = {
     user: {
-      username: `${firstName + " " + firstLastName}`,
+      username: `${user?.name}`,
       id: "abc123",
       company: company,
       operator: {
