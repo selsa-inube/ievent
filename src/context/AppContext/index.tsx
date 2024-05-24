@@ -1,9 +1,9 @@
 import { createContext, useEffect, useState } from "react";
 
-import { AppContextProviderProps, IAppContext, IClient } from "./types";
-
 import { usersMock } from "@src/mocks/users/users";
-import linparLogo from "@assets/images/linpar.png";
+import linparLogo from "@assets/linpar.png";
+
+import { AppContextProviderProps, IAppContext, IClient } from "./types";
 
 export const AppContext = createContext<IAppContext>({
   user: { username: "", id: "", company: "", operator: { name: "", logo: "" } },
