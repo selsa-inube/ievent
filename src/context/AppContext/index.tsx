@@ -1,9 +1,10 @@
 import { createContext, useEffect, useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import linparLogo from "@assets/linpar.png";
 
 import { AppContextProviderProps, IAppContext, IClient } from "./types";
-import { useAuth0 } from "@auth0/auth0-react";
+
 
 export const AppContext = createContext<IAppContext>({
   user: { username: "", id: "", company: "", operator: { name: "", logo: "" } },
@@ -12,6 +13,7 @@ export const AppContext = createContext<IAppContext>({
 
 export default function AppContextProvider(props: AppContextProviderProps) {
   const { children } = props;
+  const { user } = useAuth0();
   const [clientSigla, setClientSigla] = useState(
     localStorage.getItem("clientSigla") || ""
   );
@@ -20,8 +22,6 @@ export default function AppContextProvider(props: AppContextProviderProps) {
     const { sigla } = client;
     setClientSigla(sigla);
   }
-
-  const { user } = useAuth0();
 
   useEffect(() => {
     localStorage.setItem("clientSigla", clientSigla);
