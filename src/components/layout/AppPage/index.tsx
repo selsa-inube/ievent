@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Outlet } from "react-router-dom";
 import { useMediaQuery } from "@inubekit/hooks";
 import { Grid } from "@inubekit/grid";
-import { Header } from "@inubekit/header";
+
 
 import { AppContext } from "@context/AppContext";
 
@@ -14,6 +14,7 @@ import {
   StyledLogo,
   StyledMain,
 } from "./styles";
+import { Header } from "@inubekit/header";
 
 const renderLogo = (imgUrl: string) => {
   return (
