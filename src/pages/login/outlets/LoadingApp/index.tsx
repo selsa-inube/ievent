@@ -5,7 +5,6 @@ import { LoadingAppUI } from "./interface";
 
 function LoadingApp() {
   const navigate = useNavigate();
- console.log("loading");
   useEffect(() => {
     const timer = setTimeout(() => {
 

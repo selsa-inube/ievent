@@ -16,7 +16,6 @@ export interface IClients {
 }
 function LoginRoutes() {
   const clients = clientsDataMock;
-  console.log("routes");
   return (
     <Routes>
       <Route path="/" element={<Login />}>
