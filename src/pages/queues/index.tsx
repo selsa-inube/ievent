@@ -1,7 +1,7 @@
-import { QueuesUI } from "./interface";
+import { AppPage } from "@src/components/layout/AppPage";
 
 function Queues() {
-  return <QueuesUI />;
+  return <AppPage />;
 }
 
 export { Queues };
