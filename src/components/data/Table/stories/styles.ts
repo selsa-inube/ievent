@@ -23,4 +23,11 @@ const StyledModal = styled.div`
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 `;
 
-export { StyledContainerActions, StyledModal };
+const StyledContainerTitle = styled.div`
+  display: flex;
+  align-items: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+export { StyledContainerActions, StyledModal, StyledContainerTitle };

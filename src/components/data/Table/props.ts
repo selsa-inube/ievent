@@ -1,18 +1,19 @@
 interface IActions {
   id: string;
-  [key: string]: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
 }
 
 interface ITitle {
   id: string;
-  titleName: string;
+  titleName: string | React.ReactNode;
   priority: number;
 }
 
 interface IAction {
   id: string;
   actionName: string;
-  content: (entry: IActions) => JSX.Element;
+  content: (entry: IActions) => React.ReactNode;
 }
 
 interface IBreakpoint {

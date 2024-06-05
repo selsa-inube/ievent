@@ -1,10 +1,9 @@
-
-import { IPublication } from "@src/pages/queues/outlets/queuesInProgress/types";
-import { mapQueuesApiToEntities } from "./mappers";
+import { IPublication } from "@pages/queues/outlets/queuesInProgress/types";
 import { enviroment } from "@src/config/environment";
+import { mapQueuesApiToEntities } from "./mappers";
 
 const queuesInProgressForUser = async (
-  userIdentification: string,
+  userIdentification: string
 ): Promise<IPublication[]> => {
   const maxRetries = 5;
   const fetchTimeout = 3000;
@@ -21,8 +20,6 @@ const queuesInProgressForUser = async (
       const options: RequestInit = {
         method: "GET",
         headers: {
-        //   Realm: enviroment.REALM,
-        //   Authorization: `Bearer ${accessToken}`,
           "X-Business-Unit": enviroment.TEMP_BUSINESS_UNIT,
           "Content-type": "application/json; charset=UTF-8",
         },
@@ -33,7 +30,7 @@ const queuesInProgressForUser = async (
         `${
           enviroment.ICLIENT_API_URL_QUERY
         }/publications-queues?${queryParams.toString()}`,
-        options,
+        options
       );
 
       clearTimeout(timeoutId);
@@ -60,7 +57,7 @@ const queuesInProgressForUser = async (
     } catch (error) {
       if (attempt === maxRetries) {
         throw new Error(
-          "Todos los intentos fallaron. No se pudieron obtener los créditos del usuario.",
+          "Todos los intentos fallaron. No se pudieron obtener los créditos del usuario."
         );
       }
     }

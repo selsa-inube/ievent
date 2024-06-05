@@ -4,10 +4,12 @@ import {
   MdCancel,
   MdCalendarMonth,
 } from "react-icons/md";
-import { StyledContainerActions } from "./styles";
 import { Icon } from "@inubekit/icon";
 
-const titlesMock = [
+import { StyledContainerActions } from "./styles";
+import { ITitle } from "../props";
+
+const titlesMock: ITitle[] = [
   {
     id: "Subscriber",
     titleName: "Suscriptor/Evento",
@@ -22,7 +24,7 @@ const titlesMock = [
     id: "Date",
     titleName: (
       <StyledContainerActions>
-        Fecha de publicación{" "}
+        Fecha de publicación
         <Icon appearance="primary" icon={<MdImportExport />} size="24px" />
       </StyledContainerActions>
     ),
@@ -35,11 +37,8 @@ const actionsMock = [
     id: "Details",
     actionName: "Detalles",
     content: () => (
-      <StyledContainerActions>
-        <MdOutlineRemoveRedEye />
-      </StyledContainerActions>
+      <Icon appearance="gray" icon={<MdOutlineRemoveRedEye />} size="16px" />
     ),
-    type: "secondary",
   },
 ];
 
@@ -47,32 +46,21 @@ const actionsResponsiveMock = [
   {
     id: "Status",
     actionName: "",
-    content: () => (
-      <StyledContainerActions>
-        <MdCancel />
-      </StyledContainerActions>
-    ),
-    type: "secondary",
+    content: () => <Icon appearance="danger" icon={<MdCancel />} size="20px" />,
   },
   {
     id: "date",
     actionName: "",
     content: () => (
-      <StyledContainerActions>
-        <MdCalendarMonth />
-      </StyledContainerActions>
+      <Icon appearance="dark" icon={<MdCalendarMonth />} size="16px" />
     ),
-    type: "primary",
   },
   {
     id: "Details",
     actionName: "Detalles",
     content: () => (
-      <StyledContainerActions>
-        <MdOutlineRemoveRedEye />
-      </StyledContainerActions>
+      <Icon appearance="dark" icon={<MdOutlineRemoveRedEye />} size="16px" />
     ),
-    type: "remove",
   },
 ];
 

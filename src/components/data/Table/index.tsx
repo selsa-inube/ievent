@@ -7,15 +7,17 @@ import { StyledContainer } from "./styles";
 import { IAction, IActions, IBreakpoint, ITitle } from "./props";
 
 interface ITable {
-  id: string;
-  titles: ITitle[];
   actions: IAction[];
   actionsResponsive:IAction[];
   entries: IActions[];
-  filter?: string;
-  pageLength?: number;
+  id: string;
+   loading: boolean;
+  titles: ITitle[];
+  widthColumnSuscriber?:string;
   breakpoints?: IBreakpoint[];
+  filter?: string;
   infoTitle?: string;
+  pageLength?: number;
 }
 
 const Table = (props: ITable) => {
@@ -26,7 +28,9 @@ const Table = (props: ITable) => {
     actionsResponsive,
     entries,
     filter = "",
-    pageLength = 10,
+    loading,
+    widthColumnSuscriber,
+    pageLength = 20,
     breakpoints,
     infoTitle,
   } = props;
@@ -38,7 +42,7 @@ const Table = (props: ITable) => {
       for (const attribute in entry) {
         if (
           titlesId.includes(attribute) &&
-          entry[attribute]
+           entry[attribute]
             .toString()
             .toLowerCase()
             .includes(filter.toLowerCase())
@@ -92,6 +96,8 @@ const Table = (props: ITable) => {
           actions={actions}
           actionsResponsive={actionsResponsive}
           entries={getPageEntries()}
+          loading={loading}
+          widthColumnSuscriber={widthColumnSuscriber}
           breakpoints={breakpoints!}
           infoTitle={infoTitle!}
           pageLength={pageLength}

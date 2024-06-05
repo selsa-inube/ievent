@@ -1,15 +1,19 @@
 import { useState } from "react";
 import { MdClose } from "react-icons/md";
-
-// import { Blanket } from "@inubekit/blanket";
 import { Stack } from "@inubekit/stack";
 import { Text } from "@inubekit/text";
+import { Blanket } from "@inubekit/blanket";
 
-import { titlesMock, actionsMock, breakPointsMock, actionsResponsiveMock, entriesMock } from "./mocks";
+import {
+  titlesMock,
+  actionsMock,
+  breakPointsMock,
+  actionsResponsiveMock,
+  entriesMock,
+} from "./mocks";
 import { props, parameters } from "../props";
 import { Table, ITable } from "..";
 import { StyledModal } from "./styles";
-
 
 const story = {
   title: "data/Table",
@@ -24,7 +28,7 @@ const LoremModal = () => {
   if (!isVisible) return null;
 
   return (
-    // <Blanket>
+    <Blanket>
       <StyledModal>
         <Stack justifyContent="space-between">
           <Text
@@ -43,7 +47,7 @@ const LoremModal = () => {
           lacinia odio vitae vestibulum.
         </Text>
       </StyledModal>
-    // </Blanket>
+    </Blanket>
   );
 };
 
@@ -53,7 +57,7 @@ Default.args = {
   titles: titlesMock,
   actions: actionsMock,
   actionsResponsive: actionsResponsiveMock,
-  entries:entriesMock,
+  entries: entriesMock,
   filter: "",
   pageLength: 10,
   breakpoints: breakPointsMock,

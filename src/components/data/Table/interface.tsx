@@ -1,8 +1,10 @@
 import { useMemo } from "react";
-
+import { MdInfoOutline } from "react-icons/md";
 import { Text } from "@inubekit/text";
 import { useMediaQuery } from "@inubekit/hooks";
 import { useMediaQueries } from "@inubekit/hooks";
+import { Icon } from "@inubekit/icon";
+import { SkeletonLine } from "@inubekit/skeleton";
 
 import {
   StyledTable,
@@ -16,10 +18,37 @@ import {
   StyledTdActions,
   StyledContainer,
 } from "./styles";
-import { ITable } from ".";
 import { IAction, IActions, IBreakpoint, ITitle } from "./props";
-import { Icon } from "@inubekit/icon";
-import { MdInfoOutline } from "react-icons/md";
+import { ITable } from ".";
+
+const actionsLoading = (numberActions: number) => {
+  const cellsOfActionsLoading = [];
+  for (let cellAction = 0; cellAction < numberActions; cellAction++) {
+    cellsOfActionsLoading.push(
+      <StyledTd key={cellAction}>
+        <SkeletonLine animated />
+      </StyledTd>
+    );
+  }
+  return cellsOfActionsLoading;
+};
+
+const dataLoading = (titleColumns: ITitle[], numberActions: number) => {
+  const rowsLoading = [];
+  for (let rows = 0; rows < 4; rows++) {
+    rowsLoading.push(
+      <StyledTr key={rows}>
+        {titleColumns.map((title) => (
+          <StyledTd key={`e-${title.id}`}>
+            <SkeletonLine animated />
+          </StyledTd>
+        ))}
+        {actionsLoading(numberActions)}
+      </StyledTr>
+    );
+  }
+  return rowsLoading;
+};
 
 function findCurrentMediaQuery(currentMediaQuery: { [key: string]: boolean }) {
   const lastIndexMedia = Object.values(currentMediaQuery).lastIndexOf(true);
@@ -48,9 +77,7 @@ function showActionTitle(
   actionTitleResponsive: IAction[],
   mediaQuery: boolean
 ) {
-
-
-   return !mediaQuery
+  return !mediaQuery
     ? actionTitle.map((action) => (
         <StyledThAction key={`action-${action.id}`}>
           <Text type="label" size="medium" textAlign="center" appearance="dark">
@@ -58,19 +85,15 @@ function showActionTitle(
           </Text>
         </StyledThAction>
       ))
-    : actionTitleResponsive.map((x, index) => (
-    
-      actionTitleResponsive.length-1 !== index ? <StyledThActionResponsive key={x.id}></StyledThActionResponsive> : 
-      <StyledThActionResponsive>
-          <Icon appearance="primary"
-            icon={<MdInfoOutline />}
-            size="24px"
-          />
-      </StyledThActionResponsive>
-      
-    
-  ));
-       
+    : actionTitleResponsive.map((action, index) =>
+        actionTitleResponsive.length - 1 !== index ? (
+          <StyledThActionResponsive key={action.id}></StyledThActionResponsive>
+        ) : (
+          <StyledThActionResponsive>
+            <Icon appearance="primary" icon={<MdInfoOutline />} size="24px" />
+          </StyledThActionResponsive>
+        )
+      );
 }
 
 function ShowAction(
@@ -100,15 +123,17 @@ function ShowAction(
 
 const TableUI = (props: Omit<ITable, "id">) => {
   const {
-    titles,
     actions,
     actionsResponsive,
     entries,
     breakpoints,
+    loading,
     pageLength,
+    titles,
+    widthColumnSuscriber,
   } = props;
 
-  const mediaActionOpen = useMediaQuery("(max-width: 850px)");
+  const mediaActionOpen = useMediaQuery("(max-width: 1120px)");
 
   const queriesArray = useMemo(
     () => breakpoints!.map((breakpoint) => breakpoint.breakpoint),
@@ -122,54 +147,66 @@ const TableUI = (props: Omit<ITable, "id">) => {
     [titles, breakpoints, media]
   );
 
+  const numberActions = actions ? actions.length : 0;
+
   return (
     <StyledContainer>
-    <StyledTable>
-      <StyledThead>
-        <StyledTr>
-          {TitleColumns.map((title) => (
-            <StyledThTitle
-              key={`title-${title.id}`}
-              aria-label={title.titleName}
-            >
-              <Text
-                type="label"
-                size="medium"
-                appearance="dark"
-                textAlign="start"
-              >
-                {title.titleName}
-              </Text>
-            </StyledThTitle>
-          ))}
-          {showActionTitle(actions, actionsResponsive, mediaActionOpen)}
-        </StyledTr>
-      </StyledThead>
-      <StyledTbody>
-        {entries.map((entry) => (
-          <StyledTr
-            key={`entry-${entry.id}`}
-            aria-labelledby={`entry-${entry.id}`}
-            $pageLength={pageLength}
-            $entriesLength={entries.length}
-          >
+      <StyledTable>
+        <StyledThead>
+          <StyledTr>
             {TitleColumns.map((title) => (
-              <StyledTd key={`e-${entry[title.id]}`}>
+              <StyledThTitle key={`title-${title.id}`}>
                 <Text
-                  type="body"
-                  size="small"
+                  type="label"
+                  size="medium"
                   appearance="dark"
                   textAlign="start"
                 >
-                  {entry[title.id]}
+                  {title.titleName}
                 </Text>
-              </StyledTd>
+              </StyledThTitle>
             ))}
-            {ShowAction(actions, actionsResponsive, entry, mediaActionOpen)}
+            {showActionTitle(actions, actionsResponsive, mediaActionOpen)}
           </StyledTr>
-        ))}
-      </StyledTbody>
-    </StyledTable>
+        </StyledThead>
+        <StyledTbody>
+          {loading ? (
+            dataLoading(TitleColumns, numberActions)
+          ) : (
+            <>
+              {entries.map((entry) => (
+                <StyledTr
+                  key={`entry-${entry.id}`}
+                  aria-labelledby={`entry-${entry.id}`}
+                  $pageLength={pageLength}
+                  $entriesLength={entries.length}
+                  $widthColumnSuscriber={widthColumnSuscriber}
+                >
+                  {TitleColumns.map((title) => (
+                    <StyledTd key={`e-${entry[title.id]}`}>
+                      <Text
+                        type="body"
+                        size="small"
+                        appearance="dark"
+                        textAlign="start"
+                        ellipsis
+                      >
+                        {entry[title.id]}
+                      </Text>
+                    </StyledTd>
+                  ))}
+                  {ShowAction(
+                    actions,
+                    actionsResponsive,
+                    entry,
+                    mediaActionOpen
+                  )}
+                </StyledTr>
+              ))}
+            </>
+          )}
+        </StyledTbody>
+      </StyledTable>
     </StyledContainer>
   );
 };
