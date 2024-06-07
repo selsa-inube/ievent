@@ -15,6 +15,7 @@ import { AppPage } from "./components/layout/AppPage";
 import { enviroment } from "./config/environment";
 import { Login } from "./pages/login";
 import { GlobalStyles } from "./styles/global";
+import { QueuesRoutes } from "./routes/queues";
 
 function LogOut() {
   localStorage.clear();
@@ -25,7 +26,7 @@ function LogOut() {
 
 function FirstPage() {
   const { user } = useContext(AppContext);
-  return  user.company.length === 0 ? <Login /> : <AppPage />;
+  return  user.company.length === 0 ? <Login /> : <QueuesRoutes />;
 
 }
 
@@ -34,6 +35,7 @@ const router = createBrowserRouter(
     <>
       <Route path="*" element={<FirstPage />} errorElement={<ErrorPage />} />
       <Route path="login/*" element={<LoginRoutes />} />
+      <Route path="/*" element={<QueuesRoutes />} />
       <Route path="logout" element={<LogOut />} />
     </>
   )
