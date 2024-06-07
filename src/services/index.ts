@@ -7,11 +7,13 @@ const queuesInProgressForUser = async (
 ): Promise<IPublication[]> => {
   const maxRetries = 5;
   const fetchTimeout = 3000;
+  const perPage= "500";
 
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       const queryParams = new URLSearchParams({
         customerPublicCode: userIdentification,
+        per_page: perPage,
       });
 
       const controller = new AbortController();
@@ -43,7 +45,7 @@ const queuesInProgressForUser = async (
 
       if (!res.ok) {
         throw {
-          message: "Error al obtener los créditos del usuario",
+          message: "Error al obtener las publicaciones",
           status: res.status,
           data,
         };
@@ -57,7 +59,7 @@ const queuesInProgressForUser = async (
     } catch (error) {
       if (attempt === maxRetries) {
         throw new Error(
-          "Todos los intentos fallaron. No se pudieron obtener los créditos del usuario."
+          "Todos los intentos fallaron. No se pudieron obtener las publicaciones."
         );
       }
     }
