@@ -19,9 +19,8 @@ const mapQueuesApiToEntities = (
     .map(mapQueuesApiToEntity)
     .filter(
       (publication) =>
-        (publication.status === "ProcessedWithError" ||
-          publication.status === "ProcessedIncident") &&
-        publication
+        publication && (publication.status === "ProcessedWithError" ||
+          publication.status === "ProcessedIncident")
     )
     .sort((a, b) => b.datePublication.getTime() - a.datePublication.getTime());
 };
