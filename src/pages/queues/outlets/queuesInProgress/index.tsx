@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
 
 import { queuesInProgressForUser } from "@src/services";
 import { QueuesInProgressUI } from "./interface";
-import { orderData } from "./utils";
 import { IPublication } from "./types";
+import { orderData } from "./utils";
 
 function QueuesInProgress() {
-  const { user } = useAuth0();
   const [searchQueues, setSearchQueues] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [orderAscending, setOrderAscending] = useState<boolean>(false);
@@ -20,15 +18,13 @@ function QueuesInProgress() {
   };
 
   const validateQueues = async () => {
-    if (!user) return;
-
     if (queues.length === 0) {
       setLoading(true);
       try {
-        const newQueues = await queuesInProgressForUser(user.identification);
+        const newQueues = await queuesInProgressForUser();
         setQueues(newQueues);
       } catch (error) {
-        console.info(error); 
+        console.info(error);
       } finally {
         setLoading(false);
       }
@@ -38,7 +34,7 @@ function QueuesInProgress() {
   useEffect(() => {
     validateQueues();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
+  }, []);
 
   const handleSearchQueues = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQueues(e.target.value);

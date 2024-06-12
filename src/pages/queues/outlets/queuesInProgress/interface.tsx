@@ -13,7 +13,6 @@ import {
 } from "./config/table";
 import { IPublication } from "./types";
 
-
 interface IQueuesInProgressProps {
   entries: IPublication[];
   loading: boolean;

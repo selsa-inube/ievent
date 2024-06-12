@@ -3,7 +3,6 @@ import { enviroment } from "@src/config/environment";
 import { mapQueuesApiToEntities } from "./mappers";
 
 const queuesInProgressForUser = async (
-  userIdentification: string
 ): Promise<IPublication[]> => {
   const maxRetries = 5;
   const fetchTimeout = 3000;
@@ -12,7 +11,6 @@ const queuesInProgressForUser = async (
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       const queryParams = new URLSearchParams({
-        customerPublicCode: userIdentification,
         per_page: perPage,
       });
 
@@ -51,11 +49,11 @@ const queuesInProgressForUser = async (
         };
       }
 
-     const normalizedCredits = Array.isArray(data)
+      const normalizedQueues = Array.isArray(data)
         ? mapQueuesApiToEntities(data)
         : [];
 
-      return normalizedCredits;
+      return normalizedQueues;
     } catch (error) {
       if (attempt === maxRetries) {
         throw new Error(
