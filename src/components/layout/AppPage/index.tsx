@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { Outlet } from "react-router-dom";
-import { useMediaQuery } from "@inubekit/hooks";
 import { Grid } from "@inubekit/grid";
 import { Header } from "@inubekit/header";
 
@@ -15,6 +14,7 @@ import {
   StyledMain,
 } from "./styles";
 
+
 const renderLogo = (imgUrl: string) => {
   return (
     <StyledContentImg to="/">
@@ -25,8 +25,6 @@ const renderLogo = (imgUrl: string) => {
 
 function AppPage() {
   const { user } = useContext(AppContext);
-
-  const smallScreen = useMediaQuery("(max-width: 849px)");
 
   return (
     <StyledAppPage>
@@ -40,7 +38,7 @@ function AppPage() {
         />
         <StyledContainer>
           <Grid
-            templateColumns={smallScreen ? "1fr" : "auto 1fr"}
+            templateColumns="1fr"
             alignContent="unset"
           >
             <StyledMain>
