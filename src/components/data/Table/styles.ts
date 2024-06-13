@@ -59,7 +59,7 @@ const StyledTr = styled.tr<IStyledTr>`
   @media (max-width: 1120px) {
     :hover {
       background-color: ${({ theme }) => theme?.palette?.neutral?.N10 || inube.palette.neutral.N10};
-      overflow-x: scroll;
+      overflow-x: auto;
     }
   }
 
