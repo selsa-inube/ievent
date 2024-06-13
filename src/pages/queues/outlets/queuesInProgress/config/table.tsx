@@ -100,7 +100,7 @@ const actions: IAction[] = [
   {
     id: "Details",
     actionName: "Detalles",
-    content: (publication) => <DetailsModal data={mapQueues(publication)} />,
+    content: (publication: IActions) => <DetailsModal data={mapQueues(publication)} />,
   },
 ];
 

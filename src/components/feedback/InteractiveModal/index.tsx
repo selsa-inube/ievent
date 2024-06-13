@@ -9,7 +9,7 @@ import { Stack } from "@inubekit/stack";
 import { Text } from "@inubekit/text";
 import { Blanket } from "@inubekit/blanket";
 
-import { IAction, IActions } from "@components/data/Table/props";
+import { IActions } from "@components/data/Table/props";
 import { ILabel } from "./types";
 import { StyledContainer, StyledModal, StyledModalFields } from "./styles";
 
@@ -20,7 +20,6 @@ interface InteractiveModalProps {
   infoData: IActions;
   labels: ILabel[];
   handleReprocess: () => void;
-  actions?: IAction[];
   infoTitle?: string;
 }
 
