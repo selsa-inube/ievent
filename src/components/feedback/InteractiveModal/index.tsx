@@ -1,16 +1,17 @@
 import { createPortal } from "react-dom";
 import { MdClear } from "react-icons/md";
-import { StyledContainer, StyledModal, StyledModalFields } from "./styles";
-import { ILabel } from "./types";
-import { useMediaQuery } from "@inubekit/hooks";
-import { Stack } from "@inubekit/stack";
-import { Text } from "@inubekit/text";
-import { Blanket } from "@inubekit/blanket";
-import { IAction, IActions } from "@src/components/data/Table/props";
 import { Fieldset } from "@inubekit/fieldset";
 import { Label } from "@inubekit/label";
 import { Button } from "@inubekit/button";
 import { Divider } from "@inubekit/divider";
+import { useMediaQuery } from "@inubekit/hooks";
+import { Stack } from "@inubekit/stack";
+import { Text } from "@inubekit/text";
+import { Blanket } from "@inubekit/blanket";
+
+import { IAction, IActions } from "@components/data/Table/props";
+import { ILabel } from "./types";
+import { StyledContainer, StyledModal, StyledModalFields } from "./styles";
 
 interface InteractiveModalProps {
   portalId: string;
@@ -45,9 +46,7 @@ const InteractiveModal = (props: InteractiveModalProps) => {
   }
 
   return createPortal(
-    <StyledContainer>
-
-   
+    <StyledContainer> 
     <Blanket>
       <StyledModal $smallScreen={isMobile}>
         <Stack direction="column" gap="20px">
