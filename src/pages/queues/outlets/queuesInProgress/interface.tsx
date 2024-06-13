@@ -6,8 +6,9 @@ import { Textfield } from "@inubekit/textfield";
 import { Table } from "@components/data/Table";
 import {
   actions,
-  actionsResponsive,
+  actionsResponsiveConfig,
   breakPointsTable,
+  infoDataTable,
   queuesNormailzeEntries,
   titlesConfig,
 } from "./config/table";
@@ -59,7 +60,8 @@ function QueuesInProgressUI(props: IQueuesInProgressProps) {
             breakpoints={breakPointsTable}
             actions={actions}
             loading={loading}
-            actionsResponsive={actionsResponsive}
+            actionsResponsive={actionsResponsiveConfig(entries)}
+            infoData={infoDataTable}
             entries={queuesNormailzeEntries(entries)}
             widthColumnSuscriber={"75%"}
             filter={searchQueues}

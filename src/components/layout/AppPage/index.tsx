@@ -4,7 +4,6 @@ import { Grid } from "@inubekit/grid";
 import { Header } from "@inubekit/header";
 
 import { AppContext } from "@context/AppContext";
-
 import { navigationConfig } from "./config/apps.config";
 import {
   StyledAppPage,

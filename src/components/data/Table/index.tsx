@@ -1,14 +1,17 @@
 import { useMemo, useState } from "react";
 import { Stack } from "@inubekit/stack";
 
+import { IInfoModal } from "@components/layout/modals/InfoModal/types";
 import { Pagination } from "./Pagination";
 import { TableUI } from "./interface";
 import { StyledContainer } from "./styles";
 import { IAction, IActions, IBreakpoint, ITitle } from "./props";
 
+
 interface ITable {
   actions: IAction[];
   actionsResponsive:IAction[];
+  infoData:IInfoModal[],
   entries: IActions[];
   id: string;
    loading: boolean;
@@ -26,6 +29,7 @@ const Table = (props: ITable) => {
     titles,
     actions,
     actionsResponsive,
+    infoData, 
     entries,
     filter = "",
     loading,
@@ -95,6 +99,7 @@ const Table = (props: ITable) => {
           titles={titles}
           actions={actions}
           actionsResponsive={actionsResponsive}
+          infoData={infoData}
           entries={getPageEntries()}
           loading={loading}
           widthColumnSuscriber={widthColumnSuscriber}
