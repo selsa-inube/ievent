@@ -14,8 +14,11 @@ const StyledContainer = styled.div`
 `;
 
 const StyledModal = styled.div<IStyledModal>`
-  background-color: ${inube.palette.neutral.N10};
- width: ${(props) => (props.$smallScreen ? "280px" : "450px")};
+  background-color: ${({ theme }) =>
+    theme?.palette?.neutral?.N10 ||
+    inube.palette.neutral.N10};
+
+  width: ${(props) => (props.$smallScreen ? "280px" : "450px")};
   min-height: ${(props) => (props.$smallScreen ? "100vh" : "auto")};
   height: auto;
   border-radius: ${(props) => (props.$smallScreen ? "0" : "8px")};
@@ -29,7 +32,7 @@ const StyledModalFields = styled.div<IStyledModal>`
   display: flex;
   gap: 4px;
   flex-direction: column;
-  hyphens:auto;
+  hyphens: auto;
 
   div {
     min-height: 0px !important;
@@ -38,12 +41,12 @@ const StyledModalFields = styled.div<IStyledModal>`
 
   @media screen and (max-width: 500px) {
     div {
-    max-width: 200px;
-  }
+      max-width: 200px;
+    }
 
-  p {
-    word-break: break-all
-  }
+    p {
+      word-break: break-all;
+    }
   }
 `;
 

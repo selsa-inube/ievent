@@ -39,8 +39,8 @@ const StyledTable = styled.table<IStyledTable>`
 `;
 
 const StyledThead = styled.thead<IStyledThead>`
-  border-bottom: solid 1px ${inube.palette.neutral.N40};
-  background-color: ${inube.palette.neutral.N0};
+  border-bottom: solid 1px ${({ theme }) => theme?.palette?.neutral?.N40 || inube.palette.neutral.N40}; 
+  background-color: ${({ theme }) => theme?.palette?.neutral?.N0 || inube.palette.neutral.N0};
 
   tr th:nth-last-child(3) {
     box-shadow: ${({ $smallScreen }) =>
@@ -49,16 +49,16 @@ const StyledThead = styled.thead<IStyledThead>`
 `;
 
 const StyledTbody = styled.tbody`
-  background-color: ${inube.palette.neutral.N0};
+  background-color:  ${({ theme }) => theme?.palette?.neutral?.N0 || inube.palette.neutral.N0}; 
 `;
 
 const StyledTr = styled.tr<IStyledTr>`
-  border-bottom: solid 1px ${inube.palette.neutral.N40};
+  border-bottom: solid 1px  ${({ theme }) => theme?.palette?.neutral?.N40 || inube.palette.neutral.N40};
   height: 40px;
 
   @media (max-width: 1120px) {
     :hover {
-      background-color: ${inube.palette.neutral.N10};
+      background-color: ${({ theme }) => theme?.palette?.neutral?.N10 || inube.palette.neutral.N10};
       overflow-x: scroll;
     }
   }
@@ -68,8 +68,8 @@ const StyledTr = styled.tr<IStyledTr>`
   }
 
   td:nth-last-child(3) {
-    border-left: ${({ $smallScreen }) =>
-      $smallScreen && `1px solid ${inube.palette.neutral.N40}`};
+    border-left: ${({ $smallScreen, theme }) =>
+      $smallScreen && "1px solid" + theme?.palette?.neutral?.N40 ||inube.palette.neutral.N40};
     box-shadow: ${({ $smallScreen }) =>
       $smallScreen && "-4px 0px 3px 0px rgba(0, 0, 0, 0.10)"};
   }
@@ -86,13 +86,13 @@ const StyledThTitle = styled.th`
 `;
 
 const StyledThAction = styled.th`
-  background-color: ${inube.palette.neutral.N30};
+  background-color: ${({ theme }) => theme?.palette?.neutral?.N30 || inube.palette.neutral.N30};
   width: 80px;
   padding: 12px 16px;
 `;
 
 const StyledThActionResponsive = styled.th`
-  background-color: ${inube.palette.neutral.N0};
+  background-color: ${({ theme }) => theme?.palette?.neutral?.N0 || inube.palette.neutral.N0};
   width: 50px;
 `;
 
@@ -108,7 +108,7 @@ const StyledTd = styled.td<IStyledTd>`
 `;
 
 const StyledTdActions = styled.td<IStyledTdActions>`
-  background-color: ${inube.palette.neutral.N0};
+  background-color: ${({ theme }) => theme?.palette?.neutral?.N0 || inube.palette.neutral.N0};
   text-align: center;
 `;
 

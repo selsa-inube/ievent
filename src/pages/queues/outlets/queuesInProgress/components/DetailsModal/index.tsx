@@ -6,12 +6,8 @@ import { InteractiveModal } from "@components/feedback/InteractiveModal";
 import { IActions } from "@components/data/Table/props";
 import { labelsModal } from "../../config/table";
 
-interface IDetailsModalProps {
-  data: IActions;
-}
 
-export const DetailsModal = (props: IDetailsModalProps) => {
-  const { data } = props;
+export const DetailsModal = ( data: IActions) => {
 
   const [showModal, setShowModal] = useState(false);
 
