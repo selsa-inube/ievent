@@ -65,6 +65,8 @@ const titlesConfig = (handleOrderData: () => void) => {
         <StyledContainerTitle>
           <span>Fecha de publicación</span>
 
+          <span>Fecha de publicación</span>
+
           <Icon
             appearance="dark"
             icon={<MdImportExport />}
@@ -80,6 +82,7 @@ const titlesConfig = (handleOrderData: () => void) => {
 
   return titles;
 };
+
 
 const labelsModal = [
   {
@@ -171,6 +174,7 @@ const infoDataTable: IInfoModal[] = [
 
 const breakPointsTable = [
   { breakpoint: "(min-width: 1121px)", totalColumns: 3 },
+  { breakpoint: "(max-width: 1120px)", totalColumns: 1 },
   { breakpoint: "(max-width: 1120px)", totalColumns: 1 },
 ];
 
