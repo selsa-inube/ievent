@@ -6,11 +6,13 @@ interface IStyledImage {
 }
 
 const StyledWelcomeContainer = styled.div`
-background-color: ${inube.palette.neutral.N30};
+  background-color: ${({ theme }) =>
+    theme?.palette?.neutral?.N30 || inube.palette.neutral.N30};
 `;
 
 const StyledOutletContainer = styled(StyledWelcomeContainer)`
-background-color: ${inube.palette.neutral.N0};
+  background-color: ${({ theme }) =>
+    theme?.palette?.neutral?.N0 || inube.palette.neutral.N0};
 `;
 
 const StyledImage = styled.img<IStyledImage>`
