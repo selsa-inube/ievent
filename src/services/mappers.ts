@@ -6,9 +6,11 @@ const mapQueuesApiToEntity = (
 
   const DescripcionError = Object(publication.subscribersStatus)[0].subscriberExecutionsError
 
+  const publicCodeSuscriber = Object(publication.subscribersStatus)[0].publicCodeSuscriber.replaceAll("_", " ");
+
    const buildQueues: IPublication = {
     id: String(publication.publicationId),
-    subscriberAndEvent: `${String(publication.descriptionUse)} / ${Object(publication.subscribersStatus)[0].publicCodeSuscriber}`,
+    subscriberAndEvent: `${String(publication.abbreviatedNameTopic)} / ${publicCodeSuscriber}`,
     status: Object(publication.subscribersStatus)[0].subscriberStatus,
     datePublication: new Date(String(publication.publicationDate)),
     dateMaximus: new Date(Object(publication.subscribersStatus)[0].maximumExecutionDate),

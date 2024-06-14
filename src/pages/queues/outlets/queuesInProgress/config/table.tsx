@@ -64,9 +64,6 @@ const titlesConfig = (handleOrderData: () => void) => {
       titleName: (
         <StyledContainerTitle>
           <span>Fecha de publicación</span>
-
-          <span>Fecha de publicación</span>
-
           <Icon
             appearance="dark"
             icon={<MdImportExport />}
