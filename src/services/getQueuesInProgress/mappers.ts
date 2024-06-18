@@ -8,7 +8,7 @@ const mapQueuesApiToEntity = (
 
    const buildQueues: IPublication = {
     id: String(publication.publicationId),
-    subscriberAndEvent: `${publication.publicationId} / ${String(publication.descriptionUse)} / ${Object(publication.subscribersStatus)[0].publicCodeSuscriber}`,
+    subscriberAndEvent: `${String(publication.descriptionUse)} / ${Object(publication.subscribersStatus)[0].publicCodeSuscriber}`,
     status: Object(publication.subscribersStatus)[0].subscriberStatus,
     datePublication: new Date(String(publication.publicationDate)),
     dateMaximus: new Date(Object(publication.subscribersStatus)[0].maximumExecutionDate),
