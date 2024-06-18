@@ -3,10 +3,9 @@ import { useState } from "react";
 import * as Yup from "yup";
 
 import { IActions } from "@components/data/Table/props";
-import { IDiscardEntry } from "./types";
+import { IDiscardEntry, IDiscardForMessage } from "./types";
 import { DiscardUI } from "./interface";
 import { deletePublication } from "./utils";
-
 
 const validationSchema = Yup.object({
   discardJustification: Yup.string()
@@ -16,8 +15,9 @@ const validationSchema = Yup.object({
 });
 
 interface DiscardProps {
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   publication: IActions;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setDataDiscardForMessage: (show: IDiscardForMessage) => void;
 }
 
 const initialValues: IDiscardEntry = {
@@ -25,7 +25,7 @@ const initialValues: IDiscardEntry = {
 };
 
 export const Discard = (props: DiscardProps) => {
-  const { setShowModal, publication } = props;
+  const { publication, setShowModal, setDataDiscardForMessage } = props;
   const [loading, setLoading] = useState(false);
 
   const formik = useFormik({
@@ -41,18 +41,32 @@ export const Discard = (props: DiscardProps) => {
 
   const handleDiscard = () => {
     setLoading(true);
-    const data = deletePublication(publication, formik.values.discardJustification)
-    data.then((response)=>{
+    let validateDiscard;
+    const data = deletePublication(
+      publication,
+      formik.values.discardJustification
+    );
+    data
+      .then((response) => {
         console.log(response);
-    }).catch((error)=>{
+        setDataDiscardForMessage({
+          id: publication.id,
+          successfulDiscard: response,
+        });
+      })
+      .catch((error) => {
         console.error(error);
-    })
+        setDataDiscardForMessage({
+          id: publication.id,
+          successfulDiscard: false,
+        });
+      });
+    console.log("validateDiscard", validateDiscard);
     setLoading(false);
     setShowModal(false);
+  };
 
-    }
-    
-    return (
+  return (
     <DiscardUI
       formik={formik}
       loading={loading}

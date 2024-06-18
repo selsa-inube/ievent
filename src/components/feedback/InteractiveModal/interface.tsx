@@ -10,12 +10,9 @@ import { Text } from "@inubekit/text";
 import { Blanket } from "@inubekit/blanket";
 
 import { Discard } from "@pages/queues/outlets/queuesInProgress/components/Discard";
+import { IDiscardForMessage } from "@pages/queues/outlets/queuesInProgress/components/Discard/types";
 import { IActions } from "@components/data/Table/props";
-import {
-  StyledContainer,
-  StyledModal,
-  StyledModalFields,
-} from "./styles";
+import { StyledContainer, StyledModal, StyledModalFields } from "./styles";
 import { useState } from "react";
 import { ILabel } from "./types";
 
@@ -24,6 +21,7 @@ interface InteractiveModalUIProps {
   title: string;
   infoData: IActions;
   labels: ILabel[];
+  setDataDiscardForMessage: (show: IDiscardForMessage) => void;
   onCloseModal: () => void;
   handleReprocess: () => void;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -36,6 +34,7 @@ const InteractiveModalUI = (props: InteractiveModalUIProps) => {
     title,
     infoData,
     labels,
+    setDataDiscardForMessage,
     onCloseModal,
     handleReprocess,
     setShowModal,
@@ -129,7 +128,11 @@ const InteractiveModalUI = (props: InteractiveModalUIProps) => {
                   )
               )}
               {discard && (
-               <Discard setShowModal={setShowModal} publication={infoData}/>
+                <Discard
+                  setShowModal={setShowModal}
+                  publication={infoData}
+                  setDataDiscardForMessage={setDataDiscardForMessage}
+                />
               )}
             </Stack>
             <Stack gap="8px" justifyContent="flex-end">

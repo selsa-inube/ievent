@@ -1,18 +1,24 @@
 import { useEffect, useState } from "react";
 
-import { queuesInProgressForUser } from "@src/services/getQueuesInProgress";
+import { queuesInProgressForUser } from "@services/getQueuesInProgress";
+import {
+  IMessage,
+  IMessageState,
+} from "@components/feedback/RenderMessage/types";
+
 import { QueuesInProgressUI } from "./interface";
 import { IPublication } from "./types";
 import { orderData } from "./utils";
-import { IMessageState } from "@src/components/feedback/RenderMessage/types";
-
+import { IDiscardForMessage } from "./components/Discard/types";
+import { generalMessage } from "./config/messaage.config";
 
 function QueuesInProgress() {
   const [searchQueues, setSearchQueues] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [orderAscending, setOrderAscending] = useState<boolean>(false);
   const [queues, setQueues] = useState<IPublication[]>([]);
-  const [idPublicationDiscard, setIdPublicationDiscard] = useState("");
+  const [discardForMessage, setDiscardForMessage] =
+    useState<IDiscardForMessage>({ id: "", successfulDiscard: false });
   const [message, setMessage] = useState<IMessageState>({
     visible: false,
   });
@@ -42,17 +48,23 @@ function QueuesInProgress() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // useEffect(() => {
-  //   const filterDiscardPublication = queues.filter(
-  //     (publication) => publication.id !== idPublicationDiscard
-  //   );
-  //   filterDiscardPublication &&
-  //     setMessage({
-  //       visible: true,
-  //       data: ,
-  //     });
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [idPublicationDiscard]);
+  useEffect(() => {
+    const messageType = discardForMessage.successfulDiscard
+      ? generalMessage.success
+      : generalMessage.failed;
+
+    const filterDiscardPublication = queues.filter(
+      (publication) => publication.id !== discardForMessage.id
+    );
+
+    discardForMessage.successfulDiscard && setQueues(filterDiscardPublication);
+
+    setMessage({
+      visible: true,
+      data: messageType as IMessage,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [discardForMessage.successfulDiscard]);
 
   const handleSearchQueues = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQueues(e.target.value);
@@ -70,11 +82,11 @@ function QueuesInProgress() {
       loading={loading}
       searchQueues={searchQueues}
       entries={queues}
-      idPublicationDiscard={idPublicationDiscard}
+      idPublicationDiscard={discardForMessage.id}
       message={message}
       handleOrderData={handleOrderData}
       handleCloseSectionMessage={handleCloseSectionMessage}
-      setIdPublicationDiscard={setIdPublicationDiscard}
+      setDiscardForMessage={setDiscardForMessage}
     />
   );
 }

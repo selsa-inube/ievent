@@ -89,7 +89,7 @@ function showActionTitle(
         actionTitleResponsive.length - 1 !== index ? (
           <StyledThActionResponsive key={action.id}></StyledThActionResponsive>
         ) : (
-          <StyledThActionResponsive>
+          <StyledThActionResponsive key={"action-00"}>
             <Icon appearance="primary" icon={<MdInfoOutline />} size="24px" />
           </StyledThActionResponsive>
         )

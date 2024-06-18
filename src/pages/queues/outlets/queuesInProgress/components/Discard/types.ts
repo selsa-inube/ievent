@@ -2,4 +2,9 @@
     discardJustification: string;
   }
 
-  export type { IDiscardEntry };
+  interface IDiscardForMessage {
+    id: string;
+    successfulDiscard:boolean;
+  }
+
+  export type { IDiscardEntry, IDiscardForMessage };

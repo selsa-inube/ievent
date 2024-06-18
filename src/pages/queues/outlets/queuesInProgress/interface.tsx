@@ -4,16 +4,18 @@ import { Stack } from "@inubekit/stack";
 import { Textfield } from "@inubekit/textfield";
 
 import { Table } from "@components/data/Table";
+
+import { RenderMessage } from "@components/feedback/RenderMessage";
+import { IMessageState } from "@components/feedback/RenderMessage/types";
+import { IDiscardForMessage } from "./components/Discard/types";
 import {
-  actions,
-  actionsResponsive,
+  actionsConfig,
+  actionsResponsiveConfig,
   breakPointsTable,
   queuesNormailzeEntries,
   titlesConfig,
 } from "./config/table";
 import { IPublication } from "./types";
-import { RenderMessage } from "@src/components/feedback/RenderMessage";
-import { IMessageState } from "@src/components/feedback/RenderMessage/types";
 
 interface IQueuesInProgressProps {
   entries: IPublication[];
@@ -24,7 +26,7 @@ interface IQueuesInProgressProps {
   handleCloseSectionMessage: ()=> void;
   handleSearchQueues: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleOrderData: () => void;
-  setIdPublicationDiscard?: (show: string) => void;
+  setDiscardForMessage: (show: IDiscardForMessage) => void;
   
 }
 
@@ -38,7 +40,7 @@ function QueuesInProgressUI(props: IQueuesInProgressProps) {
     handleCloseSectionMessage,
     handleSearchQueues,
     handleOrderData,    
-    // setIdPublicationDiscard,
+    setDiscardForMessage,
   } = props;
 
   const smallScreen = useMediaQuery("(max-width: 580px)");
@@ -69,9 +71,9 @@ function QueuesInProgressUI(props: IQueuesInProgressProps) {
             id="tableQueuesInProgress"
             titles={titlesConfig(handleOrderData)}
             breakpoints={breakPointsTable}
-            actions={actions}
+            actions={actionsConfig(setDiscardForMessage)}
             loading={loading}
-            actionsResponsive={actionsResponsive}
+            actionsResponsive={actionsResponsiveConfig(setDiscardForMessage)}
             entries={queuesNormailzeEntries(entries)}
             widthColumnSuscriber={"75%"}
             filter={searchQueues}

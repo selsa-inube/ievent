@@ -1,16 +1,17 @@
 import { Icon } from "@inubekit/icon";
-import {
-  MdCalendarMonth,
-  MdCancel,
-  MdImportExport,
-} from "react-icons/md";
+import { MdCalendarMonth, MdCancel, MdImportExport } from "react-icons/md";
 
 import { IAction, IActions, ITitle } from "@components/data/Table/props";
 import { StyledContainerTitle } from "@components/data/Table/stories/styles";
 
-import { formatDateWithoutTime, formatPrimaryDate, formatStatus } from "../utils";
+import {
+  formatDateWithoutTime,
+  formatPrimaryDate,
+  formatStatus,
+} from "../utils";
 import { IPublication } from "../types";
 import { DetailsModal } from "../components/DetailsModal";
+import { IDiscardForMessage } from "../components/Discard/types";
 
 const mapQueues = (publication: IActions) => {
   return {
@@ -31,7 +32,7 @@ const queuesNormailzeEntries = (publication: IPublication[]) =>
     status: entry.status && formatStatus(entry.status),
     datePublication:
       entry.datePublication && formatPrimaryDate(entry.datePublication),
-      dateMaximus:entry.dateMaximus && formatDateWithoutTime(entry.dateMaximus) 
+    dateMaximus: entry.dateMaximus && formatDateWithoutTime(entry.dateMaximus),
   }));
 
 const titlesConfig = (handleOrderData: () => void) => {
@@ -96,34 +97,56 @@ const labelsModal = [
   },
 ];
 
+const actionsConfig = (
+  setDataDiscardForMessage: (show: IDiscardForMessage) => void
+) => {
+  const actions: IAction[] = [
+    {
+      id: "Details",
+      actionName: "Detalles",
+      content: (publication: IActions) => (
+        <DetailsModal
+          data={mapQueues(publication)}
+          setDataDiscardForMessage={setDataDiscardForMessage}
+        />
+      ),
+    },
+  ];
+  return actions;
+};
 
-const actions: IAction[] = [
-  {
-    id: "Details",
-    actionName: "Detalles",
-    content: (publication: IActions) => <DetailsModal data={mapQueues(publication)} />,
-  },
-];
+const actionsResponsiveConfig = (
+  setDataDiscardForMessage: (show: IDiscardForMessage) => void
+) => {
+  const actionsResponsive: IAction[] = [
+    {
+      id: "Status",
+      actionName: "",
+      content: () => (
+        <Icon appearance="danger" icon={<MdCancel />} size="20px" />
+      ),
+    },
+    {
+      id: "date",
+      actionName: "",
+      content: () => (
+        <Icon appearance="dark" icon={<MdCalendarMonth />} size="16px" />
+      ),
+    },
+    {
+      id: "Details",
+      actionName: "Detalles",
+      content: (publication) => (
+        <DetailsModal
+          data={mapQueues(publication)}
+          setDataDiscardForMessage={setDataDiscardForMessage}
+        />
+      ),
+    },
+  ];
 
-const actionsResponsive: IAction[] = [
-  {
-    id: "Status",
-    actionName: "",
-    content: () => <Icon appearance="danger" icon={<MdCancel />} size="20px" />,
-  },
-  {
-    id: "date",
-    actionName: "",
-    content: () => (
-      <Icon appearance="dark" icon={<MdCalendarMonth />} size="16px" />
-    ),
-  },
-  {
-    id: "Details",
-    actionName: "Detalles",
-    content: (publication) => <DetailsModal data={mapQueues(publication)} />,
-  },
-];
+  return actionsResponsive;
+};
 
 const breakPointsTable = [
   { breakpoint: "(min-width: 1121px)", totalColumns: 3 },
@@ -132,8 +155,8 @@ const breakPointsTable = [
 
 export {
   titlesConfig,
-  actions,
-  actionsResponsive,
+  actionsConfig,
+  actionsResponsiveConfig,
   breakPointsTable,
   labelsModal,
   queuesNormailzeEntries,
