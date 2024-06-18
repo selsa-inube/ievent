@@ -4,10 +4,11 @@ import { BrowserRouter } from "react-router-dom";
 
 import { Button } from "@inubekit/button";
 import { Tag } from "@inubekit/tag";
-import { InteractiveModal, InteractiveModalProps } from "../index";
+import { InteractiveModal } from "../index";
+import { InteractiveModalUIProps } from "../interface";
 
 const meta: Meta<typeof InteractiveModal> = {
-  title: "design/feedback/InteractiveModal",
+  title: "feedback/InteractiveModal",
   component: InteractiveModal,
   decorators: [
     (Story: StoryFn) => (
@@ -57,7 +58,7 @@ const labels = [
   },
 ];
 
-const Template: StoryFn<InteractiveModalProps> = (args) => {
+const Template: StoryFn<InteractiveModalUIProps> = (args) => {
   const [showModal, setShowModal] = useState(false);
 
   return (

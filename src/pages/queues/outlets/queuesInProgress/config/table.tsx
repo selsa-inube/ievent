@@ -96,6 +96,7 @@ const labelsModal = [
   },
 ];
 
+
 const actions: IAction[] = [
   {
     id: "Details",

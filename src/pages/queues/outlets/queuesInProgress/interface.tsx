@@ -12,23 +12,35 @@ import {
   titlesConfig,
 } from "./config/table";
 import { IPublication } from "./types";
+import { RenderMessage } from "@src/components/feedback/RenderMessage";
+import { IMessageState } from "@src/components/feedback/RenderMessage/types";
 
 interface IQueuesInProgressProps {
   entries: IPublication[];
+  idPublicationDiscard: string;
   loading: boolean;
+  message: IMessageState;
+  searchQueues: string;
+  handleCloseSectionMessage: ()=> void;
   handleSearchQueues: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleOrderData: () => void;
-  searchQueues: string;
+  setIdPublicationDiscard?: (show: string) => void;
+  
 }
 
 function QueuesInProgressUI(props: IQueuesInProgressProps) {
   const {
-    loading,
-    handleSearchQueues,
-    searchQueues,
     entries,
-    handleOrderData,
+    idPublicationDiscard,
+    loading,
+    message,
+    searchQueues,
+    handleCloseSectionMessage,
+    handleSearchQueues,
+    handleOrderData,    
+    // setIdPublicationDiscard,
   } = props;
+
   const smallScreen = useMediaQuery("(max-width: 580px)");
 
   return (
@@ -64,6 +76,13 @@ function QueuesInProgressUI(props: IQueuesInProgressProps) {
             widthColumnSuscriber={"75%"}
             filter={searchQueues}
           />
+          {idPublicationDiscard && message.visible && (
+            <RenderMessage
+              message={message}
+              handleCloseMessage={handleCloseSectionMessage}
+              onMessageClosed={handleCloseSectionMessage}
+            />
+          )}
         </Stack>
       </Stack>
     </>

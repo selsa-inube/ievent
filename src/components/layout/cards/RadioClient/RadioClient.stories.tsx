@@ -3,7 +3,7 @@ import { clientsDataMock } from "@mocks/login/clients.mock";
 
 const story = {
   components: [RadioClient],
-  title: "components/Cards/RadioClient",
+  title: "Cards/RadioClient",
   argTypes: {
     handleChange: { action: "checked" },
   },

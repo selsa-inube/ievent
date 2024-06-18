@@ -1,12 +1,13 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import { Clients } from ".";
-import { clientsDataMock } from "@mocks/login/clients.mock";
 import { Meta } from "@storybook/react";
+
+import { clientsDataMock } from "@mocks/login/clients.mock";
+import { Clients } from ".";
 
 const meta: Meta<typeof Clients> = {
 
-  title: "layouts/login/outlets/clients",
+  title: "login/outlets/clients",
   component: Clients,
   parameters: {
     layout: "fullscreen",

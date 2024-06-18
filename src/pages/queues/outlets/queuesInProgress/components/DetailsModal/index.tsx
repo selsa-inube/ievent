@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { Icon } from "@inubekit/icon";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { Icon } from "@inubekit/icon";
 
 import { InteractiveModal } from "@components/feedback/InteractiveModal";
 import { IActions } from "@components/data/Table/props";
 import { labelsModal } from "../../config/table";
-
 
 interface IDetailsModalProps {
   data: IActions;
@@ -36,9 +35,10 @@ export const DetailsModal = (props: IDetailsModalProps) => {
           title="Detalle"
           infoData={data}
           labels={labelsModal}
+          setShowModal={setShowModal}
           infoTitle="Suscriptor"
           onCloseModal={handleToggleModal}
-          handleReprocess={()=>{}}
+          handleReprocess={() => {}}
         />
       )}
     </>
