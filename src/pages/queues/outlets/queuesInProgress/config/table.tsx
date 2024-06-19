@@ -1,5 +1,11 @@
 import { Icon } from "@inubekit/icon";
-import { MdCalendarMonth, MdCancel, MdImportExport } from "react-icons/md";
+import {
+  MdCalendarMonth,
+  MdCancel,
+  MdDoDisturbOn,
+  MdImportExport,
+  MdOutlineRemoveRedEye,
+} from "react-icons/md";
 
 import { IAction, IActions, ITitle } from "@components/data/Table/props";
 import { StyledContainerTitle } from "@components/data/Table/stories/styles";
@@ -9,10 +15,11 @@ import {
   formatPrimaryDate,
   formatStatus,
 } from "../utils";
-import { IPublication } from "../types";
+import { EStatus, IPublication } from "../types";
 import { DetailsModal } from "../components/DetailsModal";
 import { IDiscardForMessage } from "../components/Discard/types";
 import { Text } from '@inubekit/text';
+import { IInfoModal } from "@src/components/layout/modals/InfoModal/types";
 
 const mapQueues = (publication: IActions) => {
   return {
@@ -35,6 +42,12 @@ const queuesNormailzeEntries = (publication: IPublication[]) =>
       entry.datePublication && formatPrimaryDate(entry.datePublication),
     dateMaximus: entry.dateMaximus && formatDateWithoutTime(entry.dateMaximus),
   }));
+
+const statusActions = (publicationId: string, entries: IPublication[]) => {
+  const publication =  entries.find((entry) => entry.id === publicationId);
+  return publication?.status === EStatus.ProcessedWithError
+
+};
 
 const titlesConfig = (handleOrderData: () => void) => {
   const titles: ITitle[] = [
@@ -74,6 +87,7 @@ const titlesConfig = (handleOrderData: () => void) => {
 
   return titles;
 };
+
 
 const labelsModal = [
   {
@@ -122,15 +136,19 @@ const actionsConfig = (
 };
 
 const actionsResponsiveConfig = (
+  entries: IPublication[],
   setDataDiscardForMessage: (show: IDiscardForMessage) => void
 ) => {
   const actionsResponsive: IAction[] = [
     {
       id: "Status",
       actionName: "",
-      content: () => (
-        <Icon appearance="danger" icon={<MdCancel />} size="20px" />
-      ),
+      content: ({ id }) =>
+        statusActions(id, entries) ? (
+          <Icon appearance="danger" icon={<MdCancel />} size="20px" />
+        ) : (
+          <Icon appearance="warning" icon={<MdDoDisturbOn />} size="20px" />
+        ),
     },
     {
       id: "date",
@@ -154,8 +172,32 @@ const actionsResponsiveConfig = (
   return actionsResponsive;
 };
 
+const infoDataTable: IInfoModal[] = [
+  {
+    infoName: "Error",
+    infoIcon: <MdCancel />,
+    appearanceIcon: "danger",
+  },
+  {
+    infoName: "Sin Procesar",
+    infoIcon: <MdDoDisturbOn />,
+    appearanceIcon: "warning",
+  },
+  {
+    infoName: "Fecha",
+    infoIcon: <MdCalendarMonth />,
+    appearanceIcon: "dark",
+  },
+  {
+    infoName: "Ver Detalle",
+    infoIcon: <MdOutlineRemoveRedEye />,
+    appearanceIcon: "dark",
+  },
+];
+
 const breakPointsTable = [
   { breakpoint: "(min-width: 1121px)", totalColumns: 3 },
+  { breakpoint: "(max-width: 1120px)", totalColumns: 1 },
   { breakpoint: "(max-width: 1120px)", totalColumns: 1 },
 ];
 
@@ -164,6 +206,7 @@ export {
   actionsConfig,
   actionsResponsiveConfig,
   breakPointsTable,
+  infoDataTable,
   labelsModal,
   queuesNormailzeEntries,
   formatPrimaryDate,

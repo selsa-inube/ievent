@@ -1,10 +1,10 @@
 import { MdSearch } from "react-icons/md";
 import { useMediaQuery } from "@inubekit/hooks";
 import { Stack } from "@inubekit/stack";
+import { Text } from "@inubekit/text";
 import { Textfield } from "@inubekit/textfield";
 
 import { Table } from "@components/data/Table";
-
 import { RenderMessage } from "@components/feedback/RenderMessage";
 import { IMessageState } from "@components/feedback/RenderMessage/types";
 import { IDiscardForMessage } from "./components/Discard/types";
@@ -12,6 +12,7 @@ import {
   actionsConfig,
   actionsResponsiveConfig,
   breakPointsTable,
+  infoDataTable,
   queuesNormailzeEntries,
   titlesConfig,
 } from "./config/table";
@@ -42,7 +43,6 @@ function QueuesInProgressUI(props: IQueuesInProgressProps) {
     handleOrderData,    
     setDiscardForMessage,
   } = props;
-
   const smallScreen = useMediaQuery("(max-width: 580px)");
 
   return (
@@ -53,6 +53,12 @@ function QueuesInProgressUI(props: IQueuesInProgressProps) {
         padding={smallScreen ? "24px" : "32px 64px"}
       >
         <Stack gap="32px" direction="column">
+        <Stack justifyContent="center">
+          <Text as="h1" type="title" size={smallScreen ? "medium" :"large"} textAlign="center" appearance="dark">
+          Cola de publicaciones
+          </Text>
+        </Stack>
+        
           <Stack justifyContent="space-between" alignItems="center">
             <Textfield
               name="searchQueues"
@@ -73,8 +79,9 @@ function QueuesInProgressUI(props: IQueuesInProgressProps) {
             breakpoints={breakPointsTable}
             actions={actionsConfig(setDiscardForMessage)}
             loading={loading}
-            actionsResponsive={actionsResponsiveConfig(setDiscardForMessage)}
+            actionsResponsive={actionsResponsiveConfig(entries,setDiscardForMessage)}
             entries={queuesNormailzeEntries(entries)}
+            infoData={infoDataTable}
             widthColumnSuscriber={"75%"}
             filter={searchQueues}
           />
