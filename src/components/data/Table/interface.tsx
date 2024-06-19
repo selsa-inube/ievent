@@ -1,9 +1,8 @@
 import { useMemo } from "react";
-import { MdInfoOutline } from "react-icons/md";
+
 import { Text } from "@inubekit/text";
 import { useMediaQuery } from "@inubekit/hooks";
 import { useMediaQueries } from "@inubekit/hooks";
-import { Icon } from "@inubekit/icon";
 import { SkeletonLine } from "@inubekit/skeleton";
 
 import {
@@ -20,6 +19,8 @@ import {
 } from "./styles";
 import { IAction, IActions, IBreakpoint, ITitle } from "./props";
 import { ITable } from ".";
+import { InfoActions } from "./InfoActions";
+import { IInfoModal } from "@src/components/layout/modals/InfoModal/types";
 
 const actionsLoading = (numberActions: number) => {
   const cellsOfActionsLoading = [];
@@ -75,7 +76,8 @@ function totalTitleColumns(
 function showActionTitle(
   actionTitle: IAction[],
   actionTitleResponsive: IAction[],
-  mediaQuery: boolean
+  mediaQuery: boolean,
+  infoData:IInfoModal[],
 ) {
   return !mediaQuery
     ? actionTitle.map((action) => (
@@ -87,10 +89,10 @@ function showActionTitle(
       ))
     : actionTitleResponsive.map((action, index) =>
         actionTitleResponsive.length - 1 !== index ? (
-          <StyledThActionResponsive key={action.id}></StyledThActionResponsive>
+          <StyledThActionResponsive key={`action-${action.id}`}></StyledThActionResponsive>
         ) : (
-          <StyledThActionResponsive>
-            <Icon appearance="primary" icon={<MdInfoOutline />} size="24px" />
+          <StyledThActionResponsive  key={"action-00"}>
+            <InfoActions data={infoData}/>           
           </StyledThActionResponsive>
         )
       );
@@ -125,6 +127,7 @@ const TableUI = (props: Omit<ITable, "id">) => {
   const {
     actions,
     actionsResponsive,
+    infoData,
     entries,
     breakpoints,
     loading,
@@ -151,8 +154,8 @@ const TableUI = (props: Omit<ITable, "id">) => {
 
   return (
     <StyledContainer>
-      <StyledTable>
-        <StyledThead>
+      <StyledTable $smallScreen={mediaActionOpen}>
+        <StyledThead $smallScreen={mediaActionOpen}>
           <StyledTr>
             {TitleColumns.map((title) => (
               <StyledThTitle key={`title-${title.id}`}>
@@ -166,7 +169,7 @@ const TableUI = (props: Omit<ITable, "id">) => {
                 </Text>
               </StyledThTitle>
             ))}
-            {showActionTitle(actions, actionsResponsive, mediaActionOpen)}
+            {showActionTitle(actions, actionsResponsive, mediaActionOpen, infoData)}
           </StyledTr>
         </StyledThead>
         <StyledTbody>
@@ -178,12 +181,13 @@ const TableUI = (props: Omit<ITable, "id">) => {
                 <StyledTr
                   key={`entry-${entry.id}`}
                   aria-labelledby={`entry-${entry.id}`}
+                  $smallScreen={mediaActionOpen}
                   $pageLength={pageLength}
                   $entriesLength={entries.length}
                   $widthColumnSuscriber={widthColumnSuscriber}
                 >
                   {TitleColumns.map((title) => (
-                    <StyledTd key={`e-${entry[title.id]}`}>
+                    <StyledTd key={`e-${entry[title.id]}`} $smallScreen={mediaActionOpen}>
                       <Text
                         type="body"
                         size="small"
