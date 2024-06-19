@@ -12,6 +12,7 @@ import {
 import { IPublication } from "../types";
 import { DetailsModal } from "../components/DetailsModal";
 import { IDiscardForMessage } from "../components/Discard/types";
+import { Text } from '@inubekit/text';
 
 const mapQueues = (publication: IActions) => {
   return {
@@ -51,7 +52,12 @@ const titlesConfig = (handleOrderData: () => void) => {
       id: "datePublication",
       titleName: (
         <StyledContainerTitle>
-          <span>Fecha de publicación</span>
+          <Text
+                    type="label"
+                    size="medium"
+                    appearance="dark"
+                    textAlign="start"
+                  >Fecha de publicación</Text>
 
           <Icon
             appearance="dark"

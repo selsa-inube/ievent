@@ -156,14 +156,19 @@ const TableUI = (props: Omit<ITable, "id">) => {
           <StyledTr>
             {TitleColumns.map((title) => (
               <StyledThTitle key={`title-${title.id}`}>
-                <Text
-                  type="label"
-                  size="medium"
-                  appearance="dark"
-                  textAlign="start"
-                >
-                  {title.titleName}
-                </Text>
+                {
+                  typeof title.titleName !== "string" ?
+                  (title.titleName)
+                  :(<Text
+                    type="label"
+                    size="medium"
+                    appearance="dark"
+                    textAlign="start"
+                  >
+                    {title.titleName}
+                  </Text>)
+                }
+                
               </StyledThTitle>
             ))}
             {showActionTitle(actions, actionsResponsive, mediaActionOpen)}
@@ -184,15 +189,22 @@ const TableUI = (props: Omit<ITable, "id">) => {
                 >
                   {TitleColumns.map((title) => (
                     <StyledTd key={`e-${entry[title.id]}`}>
-                      <Text
-                        type="body"
-                        size="small"
-                        appearance="dark"
-                        textAlign="start"
-                        ellipsis
-                      >
-                        {entry[title.id]}
-                      </Text>
+                      {
+                        typeof entry[title.id] !== "string" ? 
+                        (entry[title.id])
+                        : (
+                          <Text
+                          type="body"
+                          size="small"
+                          appearance="dark"
+                          textAlign="start"
+                          ellipsis
+                        >
+                          {entry[title.id]}
+                        </Text>
+                        )
+                      }
+                      
                     </StyledTd>
                   ))}
                   {ShowAction(
