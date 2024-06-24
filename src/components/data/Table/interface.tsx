@@ -76,7 +76,7 @@ function showActionTitle(
   actionTitle: IAction[],
   actionTitleResponsive: IAction[],
   mediaQuery: boolean,
-  infoData:IInfoModal[],
+  infoData: IInfoModal[]
 ) {
   return !mediaQuery
     ? actionTitle.map((action) => (
@@ -88,10 +88,12 @@ function showActionTitle(
       ))
     : actionTitleResponsive.map((action, index) =>
         actionTitleResponsive.length - 1 !== index ? (
-          <StyledThActionResponsive key={`action-${action.id}`}></StyledThActionResponsive>
+          <StyledThActionResponsive
+            key={`action-${action.id}`}
+          ></StyledThActionResponsive>
         ) : (
-          <StyledThActionResponsive key={"action-00"}>
-            <InfoActions data={infoData}/>
+          <StyledThActionResponsive key="action-00">
+            <InfoActions data={infoData} />
           </StyledThActionResponsive>
         )
       );
@@ -158,22 +160,26 @@ const TableUI = (props: Omit<ITable, "id">) => {
           <StyledTr>
             {TitleColumns.map((title) => (
               <StyledThTitle key={`title-${title.id}`}>
-                {
-                  typeof title.titleName !== "string" ?
-                  (title.titleName)
-                  :(<Text
+                {typeof title.titleName !== "string" ? (
+                  title.titleName
+                ) : (
+                  <Text
                     type="label"
                     size="medium"
                     appearance="dark"
                     textAlign="start"
                   >
                     {title.titleName}
-                  </Text>)
-                }
-                
+                  </Text>
+                )}
               </StyledThTitle>
             ))}
-            {showActionTitle(actions, actionsResponsive, mediaActionOpen, infoData)}
+            {showActionTitle(
+              actions,
+              actionsResponsive,
+              mediaActionOpen,
+              infoData
+            )}
           </StyledTr>
         </StyledThead>
         <StyledTbody>
@@ -191,12 +197,14 @@ const TableUI = (props: Omit<ITable, "id">) => {
                   $widthColumnSuscriber={widthColumnSuscriber}
                 >
                   {TitleColumns.map((title) => (
-                    <StyledTd key={`e-${entry[title.id]}`} $smallScreen={mediaActionOpen}>
-                     {
-                        typeof entry[title.id] !== "string" ? 
-                        (entry[title.id])
-                        : (
-                          <Text
+                    <StyledTd
+                      key={`e-${entry[title.id]}`}
+                      $smallScreen={mediaActionOpen}
+                    >
+                      {typeof entry[title.id] !== "string" ? (
+                        entry[title.id]
+                      ) : (
+                        <Text
                           type="body"
                           size="small"
                           appearance="dark"
@@ -205,8 +213,7 @@ const TableUI = (props: Omit<ITable, "id">) => {
                         >
                           {entry[title.id]}
                         </Text>
-                        )
-                      }
+                      )}
                     </StyledTd>
                   ))}
                   {ShowAction(
