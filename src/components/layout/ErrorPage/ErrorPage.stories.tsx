@@ -7,7 +7,7 @@ import { ErrorPage, ErrorPageProps } from "./index";
 
 
 const meta: Meta<typeof ErrorPage> = {
-  title: "layouts/Error",
+  title: "layout/Error",
   component: ErrorPage,
 
 };

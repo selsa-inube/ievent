@@ -11,10 +11,10 @@ const mapQueuesApiToEntity = (
     subscriberAndEvent: `${Object(publication.subscribersStatus)[0].abbreviatedNameSubscriber} / ${String(publication.descriptionUse)}`,
     status: Object(publication.subscribersStatus)[0].subscriberStatus,
     datePublication: new Date(String(publication.publicationDate)),
-    dateMaximus: new Date(
-      Object(publication.subscribersStatus)[0].maximumExecutionDate
-    ),
-    error: Object(DescripcionError)[0]?.errorDescription,
+    dateMaximus: new Date(Object(publication.subscribersStatus)[0].maximumExecutionDate),
+    subscriberStatusId: Object(publication.subscribersStatus)[0].subscriberStatusId,
+    executionErrorId: Object(DescripcionError)[0]?.executionErrorId,
+    error: Object(DescripcionError)[0]?.errorDescription
   };
   return buildQueues;
 };

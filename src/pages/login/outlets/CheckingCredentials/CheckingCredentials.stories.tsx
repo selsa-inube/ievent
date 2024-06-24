@@ -1,9 +1,10 @@
 import { BrowserRouter } from "react-router-dom";
-import { CheckingCredentials } from ".";
 import { Meta } from "@storybook/react";
 
+import { CheckingCredentials } from ".";
+
 const meta: Meta<typeof CheckingCredentials> = {
-  title: "layouts/login/outlets/checking-credentials",
+  title: "login/outlets/checking-credentials",
   component: CheckingCredentials,
   parameters: {
     layout: "fullscreen",

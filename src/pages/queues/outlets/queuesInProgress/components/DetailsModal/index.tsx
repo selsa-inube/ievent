@@ -1,18 +1,19 @@
 import { useState } from "react";
-import { Icon } from "@inubekit/icon";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { Icon } from "@inubekit/icon";
 
 import { InteractiveModal } from "@components/feedback/InteractiveModal";
 import { IActions } from "@components/data/Table/props";
 import { labelsModal } from "../../config/table";
-
+import { IDiscardForMessage } from "../Discard/types";
 
 interface IDetailsModalProps {
   data: IActions;
+  setDataDiscardForMessage: (show: IDiscardForMessage) => void;
 }
 
 export const DetailsModal = (props: IDetailsModalProps) => {
-  const { data } = props;
+  const { data, setDataDiscardForMessage } = props;
 
   const [showModal, setShowModal] = useState(false);
 
@@ -36,9 +37,11 @@ export const DetailsModal = (props: IDetailsModalProps) => {
           title="Detalle"
           infoData={data}
           labels={labelsModal}
+          setShowModal={setShowModal}
           infoTitle="Suscriptor"
+          setDataDiscardForMessage={setDataDiscardForMessage}
           onCloseModal={handleToggleModal}
-          handleReprocess={()=>{}}
+          handleReprocess={() => {}}
         />
       )}
     </>

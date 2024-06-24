@@ -3,7 +3,7 @@ import { LoadingApp } from "./index";
 import { Meta } from "@storybook/react";
 
 const meta: Meta<typeof LoadingApp> = {
-  title: "layouts/login/outlets/loading-app",
+  title: "login/outlets/loading-app",
   component: LoadingApp,
   parameters: {
     layout: "fullscreen",

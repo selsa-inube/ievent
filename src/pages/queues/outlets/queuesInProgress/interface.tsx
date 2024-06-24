@@ -5,8 +5,11 @@ import { Text } from "@inubekit/text";
 import { Textfield } from "@inubekit/textfield";
 
 import { Table } from "@components/data/Table";
+import { RenderMessage } from "@components/feedback/RenderMessage";
+import { IMessageState } from "@components/feedback/RenderMessage/types";
+import { IDiscardForMessage } from "./components/Discard/types";
 import {
-  actions,
+  actionsConfig,
   actionsResponsiveConfig,
   breakPointsTable,
   infoDataTable,
@@ -15,24 +18,32 @@ import {
 } from "./config/table";
 import { IPublication } from "./types";
 
-
 interface IQueuesInProgressProps {
   entries: IPublication[];
+  idPublicationDiscard: string;
   loading: boolean;
+  message: IMessageState;
+  searchQueues: string;
+  handleCloseSectionMessage: ()=> void;
   handleSearchQueues: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleOrderData: () => void;
-  searchQueues: string;
+  setDiscardForMessage: (show: IDiscardForMessage) => void;
+  
 }
 
 function QueuesInProgressUI(props: IQueuesInProgressProps) {
   const {
-    loading,
-    handleSearchQueues,
-    searchQueues,
     entries,
-    handleOrderData,
+    idPublicationDiscard,
+    loading,
+    message,
+    searchQueues,
+    handleCloseSectionMessage,
+    handleSearchQueues,
+    handleOrderData,    
+    setDiscardForMessage,
   } = props;
-  const smallScreen = useMediaQuery("(max-width: 600px)");
+  const smallScreen = useMediaQuery("(max-width: 580px)");
 
   return (
     <>
@@ -66,14 +77,21 @@ function QueuesInProgressUI(props: IQueuesInProgressProps) {
             id="tableQueuesInProgress"
             titles={titlesConfig(handleOrderData)}
             breakpoints={breakPointsTable}
-            actions={actions}
+            actions={actionsConfig(setDiscardForMessage)}
             loading={loading}
-            actionsResponsive={actionsResponsiveConfig(entries)}
-            infoData={infoDataTable}
+            actionsResponsive={actionsResponsiveConfig(entries,setDiscardForMessage)}
             entries={queuesNormailzeEntries(entries)}
+            infoData={infoDataTable}
             widthColumnSuscriber={"75%"}
             filter={searchQueues}
           />
+          {idPublicationDiscard && message.visible && (
+            <RenderMessage
+              message={message}
+              handleCloseMessage={handleCloseSectionMessage}
+              onMessageClosed={handleCloseSectionMessage}
+            />
+          )}
         </Stack>
       </Stack>
     </>

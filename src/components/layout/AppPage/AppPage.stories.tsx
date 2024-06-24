@@ -23,7 +23,7 @@ const userContext = {
 };
 
 const meta: Meta<typeof AppPage> = {
-  title: "components/layout/appPage",
+  title: "layout/appPage",
   component: AppPage,
   decorators: [
     (Story: StoryFn) => (

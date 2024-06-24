@@ -17,6 +17,8 @@ import {
 } from "../utils";
 import { EStatus, IPublication } from "../types";
 import { DetailsModal } from "../components/DetailsModal";
+import { IDiscardForMessage } from "../components/Discard/types";
+import { Text } from '@inubekit/text';
 import { IInfoModal } from "@src/components/layout/modals/InfoModal/types";
 
 const mapQueues = (publication: IActions) => {
@@ -63,7 +65,13 @@ const titlesConfig = (handleOrderData: () => void) => {
       id: "datePublication",
       titleName: (
         <StyledContainerTitle>
-          <span>Fecha de publicación</span>
+          <Text
+                    type="label"
+                    size="medium"
+                    appearance="dark"
+                    textAlign="start"
+                  >Fecha de publicación</Text>
+
           <Icon
             appearance="dark"
             icon={<MdImportExport />}
@@ -109,15 +117,28 @@ const labelsModal = [
   },
 ];
 
-const actions: IAction[] = [
-  {
-    id: "Details",
-    actionName: "Detalles",
-    content: (publication) => <DetailsModal data={mapQueues(publication)} />,
-  },
-];
+const actionsConfig = (
+  setDataDiscardForMessage: (show: IDiscardForMessage) => void
+) => {
+  const actions: IAction[] = [
+    {
+      id: "Details",
+      actionName: "Detalles",
+      content: (publication: IActions) => (
+        <DetailsModal
+          data={mapQueues(publication)}
+          setDataDiscardForMessage={setDataDiscardForMessage}
+        />
+      ),
+    },
+  ];
+  return actions;
+};
 
-const actionsResponsiveConfig = (entries: IPublication[]) => {
+const actionsResponsiveConfig = (
+  entries: IPublication[],
+  setDataDiscardForMessage: (show: IDiscardForMessage) => void
+) => {
   const actionsResponsive: IAction[] = [
     {
       id: "Status",
@@ -139,7 +160,12 @@ const actionsResponsiveConfig = (entries: IPublication[]) => {
     {
       id: "Details",
       actionName: "Detalles",
-      content: (publication) => <DetailsModal data={mapQueues(publication)} />,
+      content: (publication) => (
+        <DetailsModal
+          data={mapQueues(publication)}
+          setDataDiscardForMessage={setDataDiscardForMessage}
+        />
+      ),
     },
   ];
 
@@ -177,7 +203,7 @@ const breakPointsTable = [
 
 export {
   titlesConfig,
-  actions,
+  actionsConfig,
   actionsResponsiveConfig,
   breakPointsTable,
   infoDataTable,

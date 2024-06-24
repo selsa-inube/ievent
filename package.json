@@ -23,17 +23,21 @@
     "@inubekit/header": "^2.1.2",
     "@inubekit/hooks": "^1.2.0",
     "@inubekit/icon": "^1.6.0",
+    "@inubekit/sectionmessage": "^4.2.0",
     "@inubekit/skeleton": "^2.1.0",
     "@inubekit/spinner": "^2.1.0",
     "@inubekit/stack": "^2.2.0",
     "@inubekit/tag": "^3.2.0",
     "@inubekit/text": "^2.3.0",
+    "@inubekit/textarea": "^2.5.0",
     "@inubekit/textfield": "^2.2.0",
+    "formik": "^2.4.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.2.1",
     "react-router-dom": "^6.23.1",
-    "styled-components": "^6.1.11"
+    "styled-components": "^6.1.11",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.4.0",
