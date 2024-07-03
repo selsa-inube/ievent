@@ -139,6 +139,8 @@ const actionsResponsiveConfig = (
   entries: IPublication[],
   setDataDiscardForMessage: (show: IDiscardForMessage) => void
 ) => {
+  const isMobile = window.innerWidth <=768;
+
   const actionsResponsive: IAction[] = [
     {
       id: "Status",
@@ -151,13 +153,6 @@ const actionsResponsiveConfig = (
         ),
     },
     {
-      id: "date",
-      actionName: "",
-      content: () => (
-        <Icon appearance="dark" icon={<MdCalendarMonth />} size="16px" />
-      ),
-    },
-    {
       id: "Details",
       actionName: "Detalles",
       content: (publication) => (
@@ -168,6 +163,16 @@ const actionsResponsiveConfig = (
       ),
     },
   ];
+
+  if (!isMobile) {
+    actionsResponsive.splice(1, 0, {
+      id: "date",
+      actionName: "",
+      content: () => (
+        <Icon appearance="dark" icon={<MdCalendarMonth />} size="16px" />
+      ),
+    })
+  }
 
   return actionsResponsive;
 };
