@@ -1,6 +1,5 @@
 import { Icon } from "@inubekit/icon";
 import {
-  MdCalendarMonth,
   MdCancel,
   MdDoDisturbOn,
   MdImportExport,
@@ -138,9 +137,7 @@ const actionsConfig = (
 const actionsResponsiveConfig = (
   entries: IPublication[],
   setDataDiscardForMessage: (show: IDiscardForMessage) => void
-) => {
-  const isMobile = window.innerWidth <=768;
-
+) => { 
   const actionsResponsive: IAction[] = [
     {
       id: "Status",
@@ -164,16 +161,6 @@ const actionsResponsiveConfig = (
     },
   ];
 
-  if (!isMobile) {
-    actionsResponsive.splice(1, 0, {
-      id: "date",
-      actionName: "",
-      content: () => (
-        <Icon appearance="dark" icon={<MdCalendarMonth />} size="16px" />
-      ),
-    })
-  }
-
   return actionsResponsive;
 };
 
@@ -187,11 +174,6 @@ const infoDataTable: IInfoModal[] = [
     infoName: "Sin Procesar",
     infoIcon: <MdDoDisturbOn />,
     appearanceIcon: "warning",
-  },
-  {
-    infoName: "Fecha",
-    infoIcon: <MdCalendarMonth />,
-    appearanceIcon: "dark",
   },
   {
     infoName: "Ver Detalle",
