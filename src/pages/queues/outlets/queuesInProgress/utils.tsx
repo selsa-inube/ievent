@@ -2,19 +2,17 @@ import { Tag } from "@inubekit/tag";
 
 import { EStatus, IPublication } from "./types";
 
-const formatPrimaryDate = (date: Date) => {
-  const options: Intl.DateTimeFormatOptions = {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-    timeZone: "UTC",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  };
-  const dateString = date.toLocaleDateString("en-ZA", options);
+const monthNames = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
 
-  return dateString.replace(",", " -");
+const formatPrimaryDate = (date: Date): string => {
+  const day = date.getUTCDate().toString().padStart(2, '0');
+  const month = monthNames[date.getUTCMonth()];
+  const year = date.getUTCFullYear();
+  const hours = date.getUTCHours().toString().padStart(2, '0');
+  const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+  const seconds = date.getUTCSeconds().toString().padStart(2, '0');
+
+  return `${day}/${month}/${year} - ${hours}:${minutes}:${seconds}`;
 };
 
 const formatDateWithoutTime = (date: Date) => {

@@ -32,7 +32,7 @@ const mapQueues = (publication: IActions) => {
   };
 };
 
-const queuesNormailzeEntries = (publication: IPublication[]) =>
+const queuesNormalizeEntries = (publication: IPublication[]) =>
   publication.map((entry) => ({
     ...entry,
     id: entry.id,
@@ -208,6 +208,6 @@ export {
   breakPointsTable,
   infoDataTable,
   labelsModal,
-  queuesNormailzeEntries,
+  queuesNormalizeEntries,
   formatPrimaryDate,
 };
