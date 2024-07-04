@@ -39,7 +39,7 @@ const queuesNormalizeEntries = (publication: IPublication[]) =>
     subscriberAndEvent: entry.subscriberAndEvent,
     status: entry.status && formatStatus(entry.status),
     datePublication:
-      entry.datePublication && formatPrimaryDate(entry.datePublication),
+      entry.datePublication && formatPrimaryDate(entry.datePublication, true),
     dateMaximus: entry.dateMaximus && formatDateWithoutTime(entry.dateMaximus),
   }));
 

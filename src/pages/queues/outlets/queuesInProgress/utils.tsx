@@ -2,17 +2,35 @@ import { Tag } from "@inubekit/tag";
 
 import { EStatus, IPublication } from "./types";
 
-const monthNames = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+const formatPrimaryDate = (date: Date, withTime?: boolean): string => {
+  const months = [
+    "Ene",
+    "Feb",
+    "Mar",
+    "Abr",
+    "May",
+    "Jun",
+    "Jul",
+    "Ago",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dic",
+  ];
 
-const formatPrimaryDate = (date: Date): string => {
-  const day = date.getUTCDate().toString().padStart(2, '0');
-  const month = monthNames[date.getUTCMonth()];
+  const day = date.getUTCDate().toString().padStart(2, "0");
+  const month = months[date.getUTCMonth()];
   const year = date.getUTCFullYear();
-  const hours = date.getUTCHours().toString().padStart(2, '0');
-  const minutes = date.getUTCMinutes().toString().padStart(2, '0');
-  const seconds = date.getUTCSeconds().toString().padStart(2, '0');
 
-  return `${day}/${month}/${year} - ${hours}:${minutes}:${seconds}`;
+  if (withTime) {
+    const hours = date.getUTCHours().toString().padStart(2, "0");
+    const minutes = date.getUTCMinutes().toString().padStart(2, "0");
+    const seconds = date.getUTCSeconds().toString().padStart(2, "0");
+
+    return `${day}/${month}/${year} - ${hours}:${minutes}:${seconds}`;
+  } else {
+    return `${day}/${month}/${year}`;
+  }
 };
 
 const formatDateWithoutTime = (date: Date) => {
