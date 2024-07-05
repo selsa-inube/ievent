@@ -23,11 +23,13 @@ const formatPrimaryDate = (date: Date, withTime?: boolean): string => {
   const year = date.getUTCFullYear();
 
   if (withTime) {
-    const hours = date.getUTCHours().toString().padStart(2, "0");
+    let hours = date.getUTCHours();
     const minutes = date.getUTCMinutes().toString().padStart(2, "0");
-    const seconds = date.getUTCSeconds().toString().padStart(2, "0");
+    const ampm = hours >= 12 ? "pm" : "am";
+    hours = hours % 12;
+    hours = hours ? hours : 12;
 
-    return `${day}/${month}/${year} - ${hours}:${minutes}:${seconds}`;
+    return `${day}/${month}/${year} - ${hours}:${minutes} ${ampm}`;
   } else {
     return `${day}/${month}/${year}`;
   }
