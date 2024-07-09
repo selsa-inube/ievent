@@ -51,7 +51,7 @@ function ClientsUI({
   return (
     <StyledClients>
       <Text type="title" as="h2" textAlign="center">
-        Clientes
+        Unidades de negocio
       </Text>
       <Text size="medium" textAlign="center">
         Selecciona la empresa a la que vas a representar
