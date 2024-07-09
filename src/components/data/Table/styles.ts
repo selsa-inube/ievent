@@ -45,7 +45,7 @@ const StyledThead = styled.thead<IStyledThead>`
     theme?.palette?.neutral?.N0 || inube.palette.neutral.N0};
   position: sticky;
   top: 0;
-  z-index: 1;
+
 
   tr {
     box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.1);
