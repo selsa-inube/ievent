@@ -35,16 +35,6 @@ const formatPrimaryDate = (date: Date, withTime?: boolean): string => {
   }
 };
 
-const formatDateWithoutTime = (date: Date) => {
-  const options: Intl.DateTimeFormatOptions = {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-    timeZone: "UTC",
-  };
-  return date.toLocaleDateString("en-ZA", options);
-};
-
 const formatStatus = (status: string) => {
   if (status === EStatus.ProcessedWithError) {
     return <Tag label="Error" appearance="danger" weight="strong" />;
@@ -65,4 +55,4 @@ const orderData = (data: IPublication[], orderAscending: boolean) => {
       );
 };
 
-export { formatPrimaryDate, formatDateWithoutTime, formatStatus, orderData };
+export { formatPrimaryDate, formatStatus, orderData };
