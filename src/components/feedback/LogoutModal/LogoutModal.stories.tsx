@@ -4,6 +4,7 @@ import { useState } from "react";
 import { action } from "@storybook/addon-actions";
 import { Button } from "@inubekit/button"
 import { Stack } from "@inubekit/stack"
+
 import { ILogoutModalProps, LogoutModal } from ".";
 
 const story = {

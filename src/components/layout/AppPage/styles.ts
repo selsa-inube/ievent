@@ -26,6 +26,21 @@ const StyledLogo = styled.img`
   max-width: 100px;
 `;
 
+const StyledHeaderContainer = styled.div`
+  figure{
+    width: 32px;
+    height: 32px;
+  }
+
+  svg{
+    margin: 2px;
+  }
+
+  div > div {
+    cursor: pointer;
+  }
+`;
+
 const StyledContainerNav = styled.div`
   max-height: calc(100vh - 50px);
 `;
@@ -42,6 +57,11 @@ const StyledMenuContainer = styled.div`
   box-shadow: 0px 6px 10px 4px #091e4221;
   background-color: ${({ theme }) =>
     theme?.palette?.neutral?.N0 || inube.palette.neutral.N0};
+
+  hr{
+    color: ${({ theme }) =>
+    theme?.palette?.neutral?.N40 || inube.palette.neutral.N40};
+  }
 `;
 
 export {
@@ -51,7 +71,8 @@ export {
   StyledContentImg,
   StyledLogo,
   StyledMain,
-  StyledContainerNav
+  StyledContainerNav,
+  StyledHeaderContainer
 }
 
 

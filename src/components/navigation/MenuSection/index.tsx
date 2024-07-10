@@ -1,9 +1,9 @@
 import { Stack } from "@inubekit/stack"
 import { Divider } from "@src/components/layout/Divider";
-import { MenuHeading } from "../MenuHeading";
-import { ISection } from "./types";
-import { MenuItemSpacingType } from "../MenuItem/types";
 
+import { ISection } from "./types";
+import { MenuHeading } from "../MenuHeading";
+import { MenuItemSpacingType } from "../MenuItem/types";
 import { MenuItem } from "../MenuItem";
 
 interface MenuSectionProps {
@@ -23,7 +23,7 @@ function MenuSection(props: MenuSectionProps) {
             <Stack
               key={index}
               width="280px"
-              margin="0px 0px 0px 20px"
+              margin="0px 0px 0px 15px"
               direction="column"
             >
               <Divider/>

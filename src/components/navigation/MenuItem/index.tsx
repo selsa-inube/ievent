@@ -2,7 +2,6 @@ import { Stack } from "@inubekit/stack"
 import { Text } from "@inubekit/text"
 import { Icon } from "@inubekit/icon"
 
-
 import { StyledMenuItemLink } from "./styles";
 import { MenuItemSpacingType } from "./types";
 

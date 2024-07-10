@@ -24,6 +24,10 @@ const StyledMenuItemLink = styled(Link)<IStyledMenuItemLink>`
     background-color: ${({ theme }) =>
       theme.color?.surface?.gray?.hover};
   }
+
+  & > div > div{
+    margin-top:15px
+  }
 `;
 
 export { StyledMenuItemLink };

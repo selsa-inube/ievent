@@ -3,10 +3,11 @@ import { Text } from "@inubekit/text"
 import { Icon } from "@inubekit/icon"
 import { Button } from "@inubekit/button"
 import { Blanket } from "@inubekit/blanket"
-import { StyledBackdropBlanket, StyledModal } from "./styles";
 import { MdClose } from "react-icons/md";
-import { Link } from "react-router-dom";
 import { useMediaQuery } from "@inubekit/hooks";
+import { Link } from "react-router-dom";
+
+import { StyledBackdropBlanket, StyledModal } from "./styles";
 
 interface ILogoutModalProps {
   handleShowBlanket: () => void;
@@ -30,7 +31,7 @@ function LogoutModal(props: ILogoutModalProps) {
                   size={smallScreen ? "large" : "large"}
                   appearance="dark"
                   textAlign="center"
-                  
+                  cursorHover={true}
                 >
                   Cerrar sesión
                 </Text>

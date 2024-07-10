@@ -19,7 +19,8 @@ import {
   StyledLogo,
   StyledMain,
   StyledMenuContainer,
-  StyledContainerNav
+  StyledContainerNav,
+  StyledHeaderContainer
 } from "./styles";
 
 const renderLogo = (imgUrl: string) => {
@@ -68,6 +69,7 @@ function AppPage() {
   return (
     <StyledAppPage>
       <Grid templateRows="auto 1fr" height="100vh" justifyContent="unset">
+        <StyledHeaderContainer>
         <Header
           portalId="portal"
           navigation={navigationConfig}
@@ -75,6 +77,7 @@ function AppPage() {
           userName={user.username}
           client={user.company}
         />
+        </StyledHeaderContainer>
         <StyledContainer>
           {showUserMenu && (
             <StyledMenuContainer ref={userMenuRef}>
