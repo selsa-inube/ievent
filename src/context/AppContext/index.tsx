@@ -17,15 +17,19 @@ export default function AppContextProvider(props: AppContextProviderProps) {
   const [clientSigla, setClientSigla] = useState(
     localStorage.getItem("clientSigla") || ""
   );
+
+  const[clientLogo, setClientLogo] = useState<string>(linparLogo);
   
   function handleClientChange(client: IClient) {
-    const { sigla } = client;
+    const { sigla, logo } = client;
     setClientSigla(sigla);
+    setClientLogo(logo);
   }
 
   useEffect(() => {
     localStorage.setItem("clientSigla", clientSigla);
-  }, [clientSigla]);
+    localStorage.setItem("clientLogo", clientLogo);
+  }, [clientSigla, clientLogo]);
 
   
   const company = clientSigla;
@@ -37,7 +41,7 @@ export default function AppContextProvider(props: AppContextProviderProps) {
       company: company,
       operator: {
         name: "Linpar",
-        logo: linparLogo,
+        logo: clientLogo,
       },
     },
     handleClientChange,
