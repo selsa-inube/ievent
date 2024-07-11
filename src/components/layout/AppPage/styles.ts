@@ -27,15 +27,6 @@ const StyledLogo = styled.img`
 `;
 
 const StyledHeaderContainer = styled.div`
-  figure{
-    width: 32px;
-    height: 32px;
-  }
-
-  svg{
-    margin: 2px;
-  }
-
   div > div {
     cursor: pointer;
   }

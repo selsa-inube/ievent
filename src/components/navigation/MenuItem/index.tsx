@@ -45,7 +45,7 @@ function MenuItem(props: MenuItemProps) {
             disabled={isDisabled}
           />
         )}
-        <Stack direction="column" gap="15px">
+        <Stack gap="10px">
           <Text type="label" size="large" disabled={isDisabled}>
             {title}
           </Text>

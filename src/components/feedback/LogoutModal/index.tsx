@@ -31,7 +31,7 @@ function LogoutModal(props: ILogoutModalProps) {
                   size={smallScreen ? "large" : "large"}
                   appearance="dark"
                   textAlign="center"
-                  cursorHover={true}
+                  cursorHover
                 >
                   Cerrar sesión
                 </Text>

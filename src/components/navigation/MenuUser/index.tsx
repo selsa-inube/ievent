@@ -2,8 +2,6 @@ import { Stack } from "@inubekit/stack"
 import { Text } from "@inubekit/text"
 import { Avatar } from "@inubekit/avatar"
 
-import { StyledAvatarContainer } from "./styles"
-
 interface MenuUserProps {
   userName: string;
   businessUnit?: string;
@@ -16,10 +14,8 @@ function MenuUser(props: MenuUserProps) {
   return (
     <Stack gap="20px" padding="10px 20px">
       {avatar && (
-        <Stack direction="column" justifyContent="center">
-          <StyledAvatarContainer>
-            <Avatar />
-          </StyledAvatarContainer>
+        <Stack direction="column" justifyContent="center" >
+            <Avatar/>
         </Stack>
       )}
       <Stack direction="column" justifyContent="center">
