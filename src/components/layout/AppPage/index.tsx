@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Outlet } from "react-router-dom";
 import { Grid } from "@inubekit/grid";
-import { Header } from "@inubekit/header";
+import { Header } from "@components/navigation/header/index";
 
 import { AppContext } from "@context/AppContext";
 import { navigationConfig } from "./config/apps.config";
@@ -34,6 +34,7 @@ function AppPage() {
           logoURL={renderLogo(user.operator.logo)}
           userName={user.username}
           client={user.company}
+          logoutTitle="Cerrar sesión"
         />
         <StyledContainer>
           <Grid
