@@ -5,14 +5,6 @@ interface IStyledModal {
   $smallScreen: boolean;
 }
 
-const StyledContainer = styled.div`
-  position: relative;
-
-  div {
-    z-index: 3;
-  }
-`;
-
 const StyledModal = styled.div<IStyledModal>`
   background-color: ${({ theme }) =>
     theme?.palette?.neutral?.N10 || inube.palette.neutral.N10};
@@ -27,26 +19,4 @@ const StyledModal = styled.div<IStyledModal>`
   }
 `;
 
-const StyledModalFields = styled.div<IStyledModal>`
-  display: flex;
-  gap: 4px;
-  flex-direction: column;
-  hyphens: auto;
-
-  div {
-    min-height: 0px !important;
-    margin-bottom: -8px !important;
-  }
-
-  @media screen and (max-width: 500px) {
-    div {
-      max-width: 200px;
-    }
-
-    p {
-      word-break: break-all;
-    }
-  }
-`;
-
-export { StyledContainer, StyledModal, StyledModalFields };
+export { StyledModal };

@@ -10,14 +10,15 @@ import { deletePublication } from "./utils";
 const validationSchema = Yup.object({
   discardJustification: Yup.string()
     .matches(/^[a-zA-ZÁ-Úá-úÑñ\s]*$/, "Este campo debe contener solo letras")
-    .min(10, "Debe tener máximo 10caracteres")
+    .min(10, "Debe tener minimo 10 caracteres")
     .required("Este campo no puede estar vacío"),
 });
 
 interface DiscardProps {
   publication: IActions;
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   setDataDiscardForMessage: (show: IDiscardForMessage) => void;
+  onCloseInteractiveModal: React.Dispatch<React.SetStateAction<boolean>>;
+  onCloseDiscardModal: () => void;
 }
 
 const initialValues: IDiscardEntry = {
@@ -25,7 +26,12 @@ const initialValues: IDiscardEntry = {
 };
 
 export const Discard = (props: DiscardProps) => {
-  const { publication, setShowModal, setDataDiscardForMessage } = props;
+  const {
+    publication,
+    setDataDiscardForMessage,
+    onCloseInteractiveModal,
+    onCloseDiscardModal,
+  } = props;
   const [loading, setLoading] = useState(false);
 
   const formik = useFormik({
@@ -63,7 +69,7 @@ export const Discard = (props: DiscardProps) => {
       });
     console.log("validateDiscard", validateDiscard);
     setLoading(false);
-    setShowModal(false);
+    onCloseInteractiveModal(false);
   };
 
   return (
@@ -72,6 +78,7 @@ export const Discard = (props: DiscardProps) => {
       loading={loading}
       dataComparison={dataComparison}
       handleDiscard={handleDiscard}
+      onCloseModal={onCloseDiscardModal}
     />
   );
 };
