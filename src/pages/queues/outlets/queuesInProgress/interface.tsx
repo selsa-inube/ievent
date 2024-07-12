@@ -13,7 +13,7 @@ import {
   actionsResponsiveConfig,
   breakPointsTable,
   infoDataTable,
-  queuesNormailzeEntries,
+  queuesNormalizeEntries,
   titlesConfig,
 } from "./config/table";
 import { IPublication } from "./types";
@@ -80,7 +80,7 @@ function QueuesInProgressUI(props: IQueuesInProgressProps) {
             actions={actionsConfig(setDiscardForMessage)}
             loading={loading}
             actionsResponsive={actionsResponsiveConfig(entries,setDiscardForMessage)}
-            entries={queuesNormailzeEntries(entries)}
+            entries={queuesNormalizeEntries(entries)}
             infoData={infoDataTable}
             widthColumnSuscriber={"75%"}
             filter={searchQueues}

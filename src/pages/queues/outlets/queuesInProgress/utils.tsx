@@ -2,29 +2,37 @@ import { Tag } from "@inubekit/tag";
 
 import { EStatus, IPublication } from "./types";
 
-const formatPrimaryDate = (date: Date) => {
-  const options: Intl.DateTimeFormatOptions = {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-    timeZone: "UTC",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  };
-  const dateString = date.toLocaleDateString("en-ZA", options);
+const formatPrimaryDate = (date: Date, withTime?: boolean): string => {
+  const months = [
+    "Ene",
+    "Feb",
+    "Mar",
+    "Abr",
+    "May",
+    "Jun",
+    "Jul",
+    "Ago",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dic",
+  ];
 
-  return dateString.replace(",", " -");
-};
+  const day = date.getUTCDate().toString().padStart(2, "0");
+  const month = months[date.getUTCMonth()];
+  const year = date.getUTCFullYear();
 
-const formatDateWithoutTime = (date: Date) => {
-  const options: Intl.DateTimeFormatOptions = {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-    timeZone: "UTC",
-  };
-  return date.toLocaleDateString("en-ZA", options);
+  if (withTime) {
+    let hours = date.getUTCHours();
+    const minutes = date.getUTCMinutes().toString().padStart(2, "0");
+    const ampm = hours >= 12 ? "pm" : "am";
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+
+    return `${day}/${month}/${year} - ${hours}:${minutes} ${ampm}`;
+  } else {
+    return `${day}/${month}/${year}`;
+  }
 };
 
 const formatStatus = (status: string) => {
@@ -47,4 +55,4 @@ const orderData = (data: IPublication[], orderAscending: boolean) => {
       );
 };
 
-export { formatPrimaryDate, formatDateWithoutTime, formatStatus, orderData };
+export { formatPrimaryDate, formatStatus, orderData };
