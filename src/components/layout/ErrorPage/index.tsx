@@ -1,10 +1,10 @@
-
 import { MdChevronLeft } from "react-icons/md";
 import { Grid } from "@inubekit/grid";
 import { Stack } from "@inubekit/stack";
 import { Text } from "@inubekit/text";
 import { Button } from "@inubekit/button";
 import { useMediaQueries } from "@inubekit/hooks";
+import { useNavigate } from "react-router-dom";
 
 import selsaLogo from "@assets/selsa.png";
 import errorImage from "@assets/timeout.png";
@@ -30,12 +30,18 @@ function ErrorPage(props: ErrorPageProps) {
     imageAlt = "Ha surgido un error. Revisa la descripción",
   } = props;
 
+  const navigate = useNavigate();
+
   const mediaQueries = ["(max-width: 1000px)", "(max-width: 600px)"];
   const matches = useMediaQueries(mediaQueries);
 
+  const goBack = () => {
+    navigate(-1);
+  };
+
   return (
     <Stack
-      padding={matches["(max-width: 600px)"] ? "s400" : "s1000"}
+      padding={matches["(max-width: 600px)"] ? "32px" : "80px"}
       gap={matches["(max-width: 1000px)"] ? "64px" : "120px"}
       direction="column"
     >
@@ -55,7 +61,9 @@ function ErrorPage(props: ErrorPageProps) {
               {description}
             </Text>
           </Stack>
-          <Button iconBefore={<MdChevronLeft size={18} />}>Exit</Button>
+          <Button iconBefore={<MdChevronLeft size={18} />} onClick={goBack}>
+            Exit
+          </Button>
         </Stack>
         <StyledErrorImage src={image} alt={imageAlt} />
       </Grid>

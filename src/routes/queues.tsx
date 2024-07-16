@@ -8,9 +8,9 @@ function QueuesRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Queues />}>
-      <Route path="/" element={<QueuesInProgress />} />
+        <Route path="/" element={<QueuesInProgress />} />
       </Route>
-      <Route path="/*" element={<ErrorPage />} />
+      <Route path="/service-error" element={<ErrorPage />} />
     </Routes>
   );
 }

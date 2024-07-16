@@ -18,6 +18,7 @@
     "@inubekit/button": "^4.2.0",
     "@inubekit/divider": "^0.2.0",
     "@inubekit/fieldset": "^0.5.0",
+    "@inubekit/flag": "^4.6.0",
     "@inubekit/foundations": "^2.15.0",
     "@inubekit/grid": "^2.1.0",
     "@inubekit/header": "^2.1.2",
