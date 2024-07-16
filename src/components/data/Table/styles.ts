@@ -116,8 +116,9 @@ const StyledTd = styled.td<IStyledTd>`
   text-align: center;
 
   p {
-    white-space: nowrap;
+    white-space: pre-line;
     text-overflow: clip;
+    max-height: 2.8em;
   }
 `;
 
