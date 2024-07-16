@@ -79,7 +79,7 @@ const StyledTr = styled.tr<IStyledTr>`
     width: ${({ $widthColumnSuscriber }) => $widthColumnSuscriber};
   }
 
-  td:nth-last-child(3) {
+  td:nth-last-child(2) {
     border-left: ${({ $smallScreen, theme }) =>
       ($smallScreen && "1px solid" + theme?.palette?.neutral?.N40) ||
       inube.palette.neutral.N40};

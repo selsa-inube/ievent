@@ -2,7 +2,6 @@ import {
   MdImportExport,
   MdOutlineRemoveRedEye,
   MdCancel,
-  MdCalendarMonth,
 } from "react-icons/md";
 import { Icon } from "@inubekit/icon";
 
@@ -47,13 +46,6 @@ const actionsResponsiveMock = [
     id: "Status",
     actionName: "",
     content: () => <Icon appearance="danger" icon={<MdCancel />} size="20px" />,
-  },
-  {
-    id: "date",
-    actionName: "",
-    content: () => (
-      <Icon appearance="dark" icon={<MdCalendarMonth />} size="16px" />
-    ),
   },
   {
     id: "Details",
