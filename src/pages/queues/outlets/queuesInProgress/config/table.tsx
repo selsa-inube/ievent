@@ -128,7 +128,7 @@ const actionsConfig = (
 const actionsResponsiveConfig = (
   entries: IPublication[],
   setDataDiscardForMessage: (show: IDiscardForMessage) => void
-) => { 
+) => {
   const actionsResponsive: IAction[] = [
     {
       id: "Status",
