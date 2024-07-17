@@ -50,7 +50,7 @@ const DiscardUI = (props: DiscardUIProps) => {
           disabled={!dataComparison || !formik.isValid}
           onClick={handleDiscard}
         >
-          Guardar
+          Descartar
         </Button>
       </Stack>
     </StyledContainer>
