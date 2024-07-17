@@ -2,7 +2,6 @@ import {
   MdImportExport,
   MdOutlineRemoveRedEye,
   MdCancel,
-  MdCalendarMonth,
 } from "react-icons/md";
 import { Icon } from "@inubekit/icon";
 
@@ -49,13 +48,6 @@ const actionsResponsiveMock = [
     content: () => <Icon appearance="danger" icon={<MdCancel />} size="20px" />,
   },
   {
-    id: "date",
-    actionName: "",
-    content: () => (
-      <Icon appearance="dark" icon={<MdCalendarMonth />} size="16px" />
-    ),
-  },
-  {
     id: "Details",
     actionName: "Detalles",
     content: () => (
@@ -74,25 +66,25 @@ const entriesMock = [
     id: "11",
     Subscriber: "Modification of a portfolio obligation in LINIX / update_portfolio_obligation_ICLIENT",
     Status: "Sin Procesar",
-    Date: "2024/05/15 - 00:55:40",
+    Date: "15/May/2024 - 4:34 pm",
   },
   {
     id: "12",
     Subscriber: "Not specified for the event confirmationpaymentinexternalaccount / StartPaymentWorkflow",
     Status: "Error",
-    Date: "2024/05/09 - 00:55:40",
+    Date: "09/May/2024 - 4:34 pm",
   },
   {
     id: "13",
     Subscriber: "test.linixaddotherdebt / add_other_debt_ICLIENT",
     Status: "Sin Procesar",
-    Date: "2024/05/11 - 00:55:40",
+    Date: "11/May/2024 - 4:34 pm",
   },
   {
     id: "14",
     Subscriber: "Adding a credit application in the LINIX credit application / add_credit_request",
     Status: "Error",
-    Date: "2024/05/05 - 00:55:40",
+    Date: "05/May/2024 - 4:34 pm",
   },
 ];
 

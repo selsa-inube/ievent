@@ -1,6 +1,5 @@
 import { Icon } from "@inubekit/icon";
 import {
-  MdCalendarMonth,
   MdCancel,
   MdDoDisturbOn,
   MdImportExport,
@@ -10,15 +9,11 @@ import {
 import { IAction, IActions, ITitle } from "@components/data/Table/props";
 import { StyledContainerTitle } from "@components/data/Table/stories/styles";
 
-import {
-  formatDateWithoutTime,
-  formatPrimaryDate,
-  formatStatus,
-} from "../utils";
+import { formatPrimaryDate, formatStatus } from "../utils";
 import { EStatus, IPublication } from "../types";
 import { DetailsModal } from "../components/DetailsModal";
 import { IDiscardForMessage } from "../components/Discard/types";
-import { Text } from '@inubekit/text';
+import { Text } from "@inubekit/text";
 import { IInfoModal } from "@src/components/layout/modals/InfoModal/types";
 
 const mapQueues = (publication: IActions) => {
@@ -32,21 +27,20 @@ const mapQueues = (publication: IActions) => {
   };
 };
 
-const queuesNormailzeEntries = (publication: IPublication[]) =>
+const queuesNormalizeEntries = (publication: IPublication[]) =>
   publication.map((entry) => ({
     ...entry,
     id: entry.id,
     subscriberAndEvent: entry.subscriberAndEvent,
     status: entry.status && formatStatus(entry.status),
     datePublication:
-      entry.datePublication && formatPrimaryDate(entry.datePublication),
-    dateMaximus: entry.dateMaximus && formatDateWithoutTime(entry.dateMaximus),
+      entry.datePublication && formatPrimaryDate(entry.datePublication, true),
+    dateMaximus: entry.dateMaximus && formatPrimaryDate(entry.dateMaximus),
   }));
 
 const statusActions = (publicationId: string, entries: IPublication[]) => {
-  const publication =  entries.find((entry) => entry.id === publicationId);
-  return publication?.status === EStatus.ProcessedWithError
-
+  const publication = entries.find((entry) => entry.id === publicationId);
+  return publication?.status === EStatus.ProcessedWithError;
 };
 
 const titlesConfig = (handleOrderData: () => void) => {
@@ -65,12 +59,9 @@ const titlesConfig = (handleOrderData: () => void) => {
       id: "datePublication",
       titleName: (
         <StyledContainerTitle>
-          <Text
-                    type="label"
-                    size="medium"
-                    appearance="dark"
-                    textAlign="start"
-                  >Fecha de publicación</Text>
+          <Text type="label" size="medium" appearance="dark" textAlign="start">
+            Fecha de publicación
+          </Text>
 
           <Icon
             appearance="dark"
@@ -87,7 +78,6 @@ const titlesConfig = (handleOrderData: () => void) => {
 
   return titles;
 };
-
 
 const labelsModal = [
   {
@@ -138,7 +128,7 @@ const actionsConfig = (
 const actionsResponsiveConfig = (
   entries: IPublication[],
   setDataDiscardForMessage: (show: IDiscardForMessage) => void
-) => {
+) => { 
   const actionsResponsive: IAction[] = [
     {
       id: "Status",
@@ -149,13 +139,6 @@ const actionsResponsiveConfig = (
         ) : (
           <Icon appearance="warning" icon={<MdDoDisturbOn />} size="20px" />
         ),
-    },
-    {
-      id: "date",
-      actionName: "",
-      content: () => (
-        <Icon appearance="dark" icon={<MdCalendarMonth />} size="16px" />
-      ),
     },
     {
       id: "Details",
@@ -184,11 +167,6 @@ const infoDataTable: IInfoModal[] = [
     appearanceIcon: "warning",
   },
   {
-    infoName: "Fecha",
-    infoIcon: <MdCalendarMonth />,
-    appearanceIcon: "dark",
-  },
-  {
     infoName: "Ver Detalle",
     infoIcon: <MdOutlineRemoveRedEye />,
     appearanceIcon: "dark",
@@ -208,6 +186,6 @@ export {
   breakPointsTable,
   infoDataTable,
   labelsModal,
-  queuesNormailzeEntries,
+  queuesNormalizeEntries,
   formatPrimaryDate,
 };

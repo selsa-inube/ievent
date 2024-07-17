@@ -17,11 +17,7 @@ const StyledContainer = styled.div<StyledContainer>`
   }
 
   @media screen and (max-width: 500px) {
-    div {
-      margin-bottom: 15px;
-    }
-
-    div>div>div {
+    div > div > div {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -30,4 +26,13 @@ const StyledContainer = styled.div<StyledContainer>`
   }
 `;
 
-export { StyledContainer };
+const StyledTextarea = styled.div`
+  && div div:nth-child(2) {
+    display: none;
+  }
+  && textarea {
+    resize: none;
+  }
+`;
+
+export { StyledContainer, StyledTextarea };

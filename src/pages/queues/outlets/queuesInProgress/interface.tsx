@@ -1,22 +1,25 @@
-import { MdSearch } from "react-icons/md";
+import { MdSearch, MdWarning } from "react-icons/md";
 import { useMediaQuery } from "@inubekit/hooks";
 import { Stack } from "@inubekit/stack";
 import { Text } from "@inubekit/text";
 import { Textfield } from "@inubekit/textfield";
+import { Flag } from "@inubekit/flag";
 
 import { Table } from "@components/data/Table";
 import { RenderMessage } from "@components/feedback/RenderMessage";
 import { IMessageState } from "@components/feedback/RenderMessage/types";
+
 import { IDiscardForMessage } from "./components/Discard/types";
 import {
   actionsConfig,
   actionsResponsiveConfig,
   breakPointsTable,
   infoDataTable,
-  queuesNormailzeEntries,
+  queuesNormalizeEntries,
   titlesConfig,
 } from "./config/table";
 import { IPublication } from "./types";
+import { StyledErrorMessageFlag } from "./styles";
 
 interface IQueuesInProgressProps {
   entries: IPublication[];
@@ -24,11 +27,12 @@ interface IQueuesInProgressProps {
   loading: boolean;
   message: IMessageState;
   searchQueues: string;
-  handleCloseSectionMessage: ()=> void;
+  errorMessage: string | null;
+  closeErrorMessage: () => void;
+  handleCloseSectionMessage: () => void;
   handleSearchQueues: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleOrderData: () => void;
   setDiscardForMessage: (show: IDiscardForMessage) => void;
-  
 }
 
 function QueuesInProgressUI(props: IQueuesInProgressProps) {
@@ -38,9 +42,11 @@ function QueuesInProgressUI(props: IQueuesInProgressProps) {
     loading,
     message,
     searchQueues,
+    errorMessage,
+    closeErrorMessage,
     handleCloseSectionMessage,
     handleSearchQueues,
-    handleOrderData,    
+    handleOrderData,
     setDiscardForMessage,
   } = props;
   const smallScreen = useMediaQuery("(max-width: 580px)");
@@ -53,12 +59,18 @@ function QueuesInProgressUI(props: IQueuesInProgressProps) {
         padding={smallScreen ? "24px" : "32px 64px"}
       >
         <Stack gap="32px" direction="column">
-        <Stack justifyContent="center">
-          <Text as="h1" type="title" size={smallScreen ? "medium" :"large"} textAlign="center" appearance="dark">
-          Cola de publicaciones
-          </Text>
-        </Stack>
-        
+          <Stack justifyContent="center">
+            <Text
+              as="h1"
+              type="title"
+              size={smallScreen ? "medium" : "large"}
+              textAlign="center"
+              appearance="dark"
+            >
+              Cola de publicaciones
+            </Text>
+          </Stack>
+
           <Stack justifyContent="space-between" alignItems="center">
             <Textfield
               name="searchQueues"
@@ -79,8 +91,11 @@ function QueuesInProgressUI(props: IQueuesInProgressProps) {
             breakpoints={breakPointsTable}
             actions={actionsConfig(setDiscardForMessage)}
             loading={loading}
-            actionsResponsive={actionsResponsiveConfig(entries,setDiscardForMessage)}
-            entries={queuesNormailzeEntries(entries)}
+            actionsResponsive={actionsResponsiveConfig(
+              entries,
+              setDiscardForMessage
+            )}
+            entries={queuesNormalizeEntries(entries)}
             infoData={infoDataTable}
             widthColumnSuscriber={"75%"}
             filter={searchQueues}
@@ -94,6 +109,19 @@ function QueuesInProgressUI(props: IQueuesInProgressProps) {
           )}
         </Stack>
       </Stack>
+      {errorMessage && (
+        <StyledErrorMessageFlag>
+          <Flag
+            title="Error"
+            description={errorMessage}
+            appearance="danger"
+            duration={5000}
+            icon={<MdWarning />}
+            closeFlag={closeErrorMessage}
+            isMessageResponsive
+          />
+        </StyledErrorMessageFlag>
+      )}
     </>
   );
 }

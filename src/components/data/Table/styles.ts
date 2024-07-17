@@ -79,7 +79,7 @@ const StyledTr = styled.tr<IStyledTr>`
     width: ${({ $widthColumnSuscriber }) => $widthColumnSuscriber};
   }
 
-  td:nth-last-child(3) {
+  td:nth-last-child(2) {
     border-left: ${({ $smallScreen, theme }) =>
       ($smallScreen && "1px solid" + theme?.palette?.neutral?.N40) ||
       inube.palette.neutral.N40};
@@ -116,8 +116,9 @@ const StyledTd = styled.td<IStyledTd>`
   text-align: center;
 
   p {
-    white-space: nowrap;
+    white-space: pre-line;
     text-overflow: clip;
+    max-height: 2.8em;
   }
 `;
 

@@ -20,7 +20,7 @@ import {
   StyledMain,
   StyledMenuContainer,
   StyledContainerNav,
-  StyledHeaderContainer
+  StyledHeaderContainer,
 } from "./styles";
 
 const renderLogo = (imgUrl: string) => {
@@ -70,13 +70,13 @@ function AppPage() {
     <StyledAppPage>
       <Grid templateRows="auto 1fr" height="100vh" justifyContent="unset">
         <StyledHeaderContainer>
-        <Header
-          portalId="portal"
-          navigation={navigationConfig}
-          logoURL={renderLogo(user.operator.logo)}
-          userName={user.username}
-          client={user.company}
-        />
+          <Header
+            portalId="portal"
+            navigation={navigationConfig}
+            logoURL={renderLogo(user.operator.logo)}
+            userName={user.username}
+            client={user.company}
+          />
         </StyledHeaderContainer>
         <StyledContainer>
           {showUserMenu && (
@@ -106,21 +106,21 @@ function AppPage() {
             />
           )}
           <StyledContainer>
-          <Grid templateColumns="1fr" alignContent="unset">
-          {!"1fr" && (
-              <StyledContainerNav>
-                <Nav
-                  navigation={navigationConfig}
-                  logoutPath={logoutConfig.logoutPath}
-                  logoutTitle={logoutConfig.logoutTitle}
-                />
-              </StyledContainerNav>
-            )}
-            <StyledMain>
-              <Outlet />
-            </StyledMain>
-          </Grid>
-        </StyledContainer>
+            <Grid templateColumns="1fr" alignContent="unset">
+              {!"1fr" && (
+                <StyledContainerNav>
+                  <Nav
+                    navigation={navigationConfig}
+                    logoutPath={logoutConfig.logoutPath}
+                    logoutTitle={logoutConfig.logoutTitle}
+                  />
+                </StyledContainerNav>
+              )}
+              <StyledMain>
+                <Outlet />
+              </StyledMain>
+            </Grid>
+          </StyledContainer>
         </StyledContainer>
       </Grid>
     </StyledAppPage>

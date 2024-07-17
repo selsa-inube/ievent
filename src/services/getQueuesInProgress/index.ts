@@ -2,11 +2,10 @@ import { IPublication } from "@pages/queues/outlets/queuesInProgress/types";
 import { enviroment } from "@src/config/environment";
 import { mapQueuesApiToEntities } from "./mappers";
 
-const queuesInProgressForUser = async (
-): Promise<IPublication[]> => {
+const queuesInProgressForUser = async (): Promise<IPublication[]> => {
   const maxRetries = 5;
   const fetchTimeout = 3000;
-  const perPage= "500";
+  const perPage = "500";
 
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
