@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.4",
+    "@inubekit/avatar": "^2.2.0",
     "@inubekit/blanket": "^2.2.0",
     "@inubekit/button": "^4.2.0",
     "@inubekit/divider": "^0.2.0",
@@ -24,6 +25,7 @@
     "@inubekit/header": "^2.1.2",
     "@inubekit/hooks": "^1.2.0",
     "@inubekit/icon": "^1.6.0",
+    "@inubekit/nav": "^4.4.0",
     "@inubekit/sectionmessage": "^4.2.0",
     "@inubekit/skeleton": "^2.1.0",
     "@inubekit/spinner": "^2.1.0",

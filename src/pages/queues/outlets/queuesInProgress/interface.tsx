@@ -1,5 +1,5 @@
 import { MdSearch, MdWarning } from "react-icons/md";
-import { useMediaQuery } from "@inubekit/hooks";
+import { useMediaQueries } from "@inubekit/hooks";
 import { Stack } from "@inubekit/stack";
 import { Text } from "@inubekit/text";
 import { Textfield } from "@inubekit/textfield";
@@ -19,7 +19,7 @@ import {
   titlesConfig,
 } from "./config/table";
 import { IPublication } from "./types";
-import { StyledErrorMessageFlag } from "./styles";
+import { StyledErrorMessageFlag, StyledContainerToCenter } from "./styles";
 
 interface IQueuesInProgressProps {
   entries: IPublication[];
@@ -49,66 +49,70 @@ function QueuesInProgressUI(props: IQueuesInProgressProps) {
     handleOrderData,
     setDiscardForMessage,
   } = props;
-  const smallScreen = useMediaQuery("(max-width: 580px)");
+  const [smallScreen, mediumScreen] = Object.values(
+    useMediaQueries(["(max-width: 580px)", "(max-width: 1200px) "])
+  );
 
   return (
     <>
-      <Stack
-        direction="column"
-        width="-webkit-fill-available"
-        padding={smallScreen ? "24px" : "32px 64px"}
-      >
-        <Stack gap="32px" direction="column">
-          <Stack justifyContent="center">
-            <Text
-              as="h1"
-              type="title"
-              size={smallScreen ? "medium" : "large"}
-              textAlign="center"
-              appearance="dark"
-            >
-              Cola de publicaciones
-            </Text>
-          </Stack>
+      <StyledContainerToCenter>
+        <Stack
+          direction="column"
+          width={mediumScreen ? "-webkit-fill-available" : "min(1192px, 100%)"}
+          padding={smallScreen ? "24px" : "32px 64px"}
+        >
+          <Stack gap="32px" direction="column">
+            <Stack justifyContent="center">
+              <Text
+                as="h1"
+                type="title"
+                size={smallScreen ? "medium" : "large"}
+                textAlign="center"
+                appearance="dark"
+              >
+                Cola de publicaciones
+              </Text>
+            </Stack>
 
-          <Stack justifyContent="space-between" alignItems="center">
-            <Textfield
-              name="searchQueues"
-              id="searchQueues"
-              placeholder="Búsqueda..."
-              type="search"
-              iconBefore={<MdSearch />}
-              size="compact"
-              value={searchQueues}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                handleSearchQueues(e)
-              }
+            <Stack justifyContent="space-between" alignItems="center">
+              <Textfield
+                name="searchQueues"
+                id="searchQueues"
+                placeholder="Búsqueda..."
+                type="search"
+                iconBefore={<MdSearch />}
+                size="compact"
+                value={searchQueues}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleSearchQueues(e)
+                }
+              />
+            </Stack>
+            <Table
+              id="tableQueuesInProgress"
+              titles={titlesConfig(handleOrderData)}
+              breakpoints={breakPointsTable}
+              actions={actionsConfig(setDiscardForMessage)}
+              loading={loading}
+              actionsResponsive={actionsResponsiveConfig(
+                entries,
+                setDiscardForMessage
+              )}
+              entries={queuesNormalizeEntries(entries)}
+              infoData={infoDataTable}
+              widthColumnSuscriber={"75%"}
+              filter={searchQueues}
             />
-          </Stack>
-          <Table
-            id="tableQueuesInProgress"
-            titles={titlesConfig(handleOrderData)}
-            breakpoints={breakPointsTable}
-            actions={actionsConfig(setDiscardForMessage)}
-            loading={loading}
-            actionsResponsive={actionsResponsiveConfig(
-              entries,
-              setDiscardForMessage
+            {idPublicationDiscard && message.visible && (
+              <RenderMessage
+                message={message}
+                handleCloseMessage={handleCloseSectionMessage}
+                onMessageClosed={handleCloseSectionMessage}
+              />
             )}
-            entries={queuesNormalizeEntries(entries)}
-            infoData={infoDataTable}
-            widthColumnSuscriber={"75%"}
-            filter={searchQueues}
-          />
-          {idPublicationDiscard && message.visible && (
-            <RenderMessage
-              message={message}
-              handleCloseMessage={handleCloseSectionMessage}
-              onMessageClosed={handleCloseSectionMessage}
-            />
-          )}
+          </Stack>
         </Stack>
-      </Stack>
+      </StyledContainerToCenter>
       {errorMessage && (
         <StyledErrorMessageFlag>
           <Flag
