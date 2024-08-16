@@ -1,14 +1,18 @@
 import { useContext, useState, useEffect, useRef } from "react";
 import { Outlet } from "react-router-dom";
-import { MdLogout } from "react-icons/md";
+import { MdLogout, MdOutlineChevronRight  } from "react-icons/md";
 import { Grid } from "@inubekit/grid";
 import { Header } from "@inubekit/header";
 import { Nav } from "@inubekit/nav";
+import { Icon } from "@inubekit/icon";
+import { useMediaQuery } from "@inubekit/hooks";
 
 import { AppContext } from "@context/AppContext";
 import { MenuSection } from "@components/navigation/MenuSection";
 import { MenuUser } from "@components/navigation/MenuUser";
 import { LogoutModal } from "@components/feedback/LogoutModal";
+import { BusinessUnitChange } from "@components/inputs/BusinessUnitChange";
+import { clientsDataMock } from "@mocks/login/clients.mock";
 
 import { navigationConfig, logoutConfig } from "./config/apps.config";
 
@@ -21,6 +25,7 @@ import {
   StyledMenuContainer,
   StyledContainerNav,
   StyledHeaderContainer,
+  StyledCollapseIcon
 } from "./styles";
 
 const renderLogo = (imgUrl: string) => {
@@ -35,6 +40,7 @@ function AppPage() {
   const { user } = useContext(AppContext);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [collapse, setCollapse] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -46,6 +52,8 @@ function AppPage() {
       setShowUserMenu(false);
     }
   };
+
+  const isTablet: boolean = useMediaQuery("(max-width: 1024px)");
 
   useEffect(() => {
     const selectUser = document.querySelector("header div div:nth-child(2)");
@@ -78,6 +86,15 @@ function AppPage() {
             client={user.company}
           />
         </StyledHeaderContainer>
+        <StyledCollapseIcon $collapse={collapse} onClick={() =>  setCollapse(!collapse)} $isTablet={isTablet}>
+            <Icon
+              icon={<MdOutlineChevronRight />}
+              appearance="primary"
+              size="20px"
+              cursorHover
+            />
+          </StyledCollapseIcon>
+        {collapse && <BusinessUnitChange clients={clientsDataMock}/>}
         <StyledContainer>
           {showUserMenu && (
             <StyledMenuContainer ref={userMenuRef}>
