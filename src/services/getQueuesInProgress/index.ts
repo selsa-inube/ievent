@@ -2,10 +2,11 @@ import { IPublication } from "@pages/queues/outlets/queuesInProgress/types";
 import { enviroment } from "@src/config/environment";
 import { mapQueuesApiToEntities } from "./mappers";
 
-interface FetchError extends Error {
+type FetchError = {
+  message: string;
   status?: number;
-  data?: unknown;
-}
+  name?: string;
+};
 
 const queuesInProgressForUser = async (
   navigate: (path: string) => void,
@@ -34,9 +35,7 @@ const queuesInProgressForUser = async (
       };
 
       const res = await fetch(
-        `${
-          enviroment.ICLIENT_API_URL_QUERY
-        }/publications-queues?${queryParams.toString()}`,
+        `${enviroment.ICLIENT_API_URL_QUERY}/publications-queues?${queryParams.toString()}`,
         options
       );
 
@@ -71,7 +70,9 @@ const queuesInProgressForUser = async (
         const errorMessage = `${fetchError.status} - ${fetchError.message || "Error desconocido"}`;
         setErrorMessage(errorMessage);
       } else {
-        setErrorMessage(`Error desconocido: ${fetchError.message || error}`);
+        setErrorMessage(
+          `Error desconocido: ${fetchError.message || fetchError}`
+        );
       }
 
       if (attempt === maxRetries) {
