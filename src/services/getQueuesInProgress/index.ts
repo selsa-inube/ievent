@@ -2,7 +2,15 @@ import { IPublication } from "@pages/queues/outlets/queuesInProgress/types";
 import { enviroment } from "@src/config/environment";
 import { mapQueuesApiToEntities } from "./mappers";
 
-const queuesInProgressForUser = async (): Promise<IPublication[]> => {
+interface FetchError extends Error {
+  status?: number;
+  data?: unknown;
+}
+
+const queuesInProgressForUser = async (
+  navigate: (path: string) => void,
+  setErrorMessage: (message: string | null) => void
+): Promise<IPublication[]> => {
   const maxRetries = 5;
   const fetchTimeout = 3000;
   const perPage = "500";
@@ -38,22 +46,34 @@ const queuesInProgressForUser = async (): Promise<IPublication[]> => {
         return [];
       }
 
-      const data = await res.json();
-
       if (!res.ok) {
+        const data = await res.json();
         throw {
           message: "Error al obtener las publicaciones",
           status: res.status,
           data,
-        };
+        } as FetchError;
       }
+
+      const data = await res.json();
 
       const normalizedQueues = Array.isArray(data)
         ? mapQueuesApiToEntities(data)
         : [];
 
       return normalizedQueues;
-    } catch (error) {
+    } catch (error: unknown) {
+      const fetchError = error as FetchError;
+
+      if (fetchError.name === "AbortError") {
+        navigate("/service-error");
+      } else if (fetchError.status) {
+        const errorMessage = `${fetchError.status} - ${fetchError.message || "Error desconocido"}`;
+        setErrorMessage(errorMessage);
+      } else {
+        setErrorMessage(`Error desconocido: ${fetchError.message || error}`);
+      }
+
       if (attempt === maxRetries) {
         throw new Error(
           "Todos los intentos fallaron. No se pudieron obtener las publicaciones."
