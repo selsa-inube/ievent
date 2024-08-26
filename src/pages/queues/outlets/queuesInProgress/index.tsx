@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 import { queuesInProgressForUser } from "@services/getQueuesInProgress";
 import {
@@ -25,8 +24,6 @@ function QueuesInProgress() {
   });
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const navigate = useNavigate();
-
   const handleOrderData = () => {
     setOrderAscending(!orderAscending);
     orderData(queues, orderAscending);
@@ -37,10 +34,7 @@ function QueuesInProgress() {
     if (queues.length === 0) {
       setLoading(true);
       try {
-        const newQueues = await queuesInProgressForUser(
-          navigate,
-          setErrorMessage
-        );
+        const newQueues = await queuesInProgressForUser(setErrorMessage);
         setQueues(newQueues);
       } catch (error) {
         console.error("Error durante la validación de las colas:", error);

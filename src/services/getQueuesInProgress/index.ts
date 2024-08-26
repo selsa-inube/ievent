@@ -1,5 +1,6 @@
 import { IPublication } from "@pages/queues/outlets/queuesInProgress/types";
 import { enviroment } from "@src/config/environment";
+
 import { mapQueuesApiToEntities } from "./mappers";
 
 type FetchError = {
@@ -9,12 +10,13 @@ type FetchError = {
 };
 
 const queuesInProgressForUser = async (
-  navigate: (path: string) => void,
   setErrorMessage: (message: string | null) => void
 ): Promise<IPublication[]> => {
   const maxRetries = 5;
   const fetchTimeout = 3000;
   const perPage = "500";
+
+  let lastError: FetchError | null = null;
 
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
@@ -62,20 +64,18 @@ const queuesInProgressForUser = async (
 
       return normalizedQueues;
     } catch (error: unknown) {
-      const fetchError = error as FetchError;
-
-      if (fetchError.name === "AbortError") {
-        navigate("/service-error");
-      } else if (fetchError.status) {
-        const errorMessage = `${fetchError.status} - ${fetchError.message || "Error desconocido"}`;
-        setErrorMessage(errorMessage);
-      } else {
-        setErrorMessage(
-          `Error desconocido: ${fetchError.message || fetchError}`
-        );
-      }
+      lastError = error as FetchError;
 
       if (attempt === maxRetries) {
+        if (lastError?.status) {
+          const errorMessage = `${lastError.status} - ${lastError.message || "Error desconocido"}`;
+          setErrorMessage(errorMessage);
+        } else {
+          setErrorMessage(
+            `Error desconocido: ${lastError.message || lastError}`
+          );
+        }
+
         throw new Error(
           "Todos los intentos fallaron. No se pudieron obtener las publicaciones."
         );
