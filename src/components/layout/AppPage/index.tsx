@@ -2,15 +2,12 @@ import { useContext, useState, useEffect, useRef } from "react";
 import { Outlet } from "react-router-dom";
 import { MdLogout } from "react-icons/md";
 import { Grid } from "@inubekit/grid";
-import { Header } from "@inubekit/header";
-import { Nav } from "@inubekit/nav";
+import { Header } from "@components/navigation/header";
 
 import { AppContext } from "@context/AppContext";
 import { MenuSection } from "@components/navigation/MenuSection";
 import { MenuUser } from "@components/navigation/MenuUser";
 import { LogoutModal } from "@components/feedback/LogoutModal";
-
-import { navigationConfig, logoutConfig } from "./config/apps.config";
 
 import {
   StyledAppPage,
@@ -19,7 +16,6 @@ import {
   StyledLogo,
   StyledMain,
   StyledMenuContainer,
-  StyledContainerNav,
   StyledHeaderContainer,
 } from "./styles";
 
@@ -71,8 +67,6 @@ function AppPage() {
       <Grid templateRows="auto 1fr" height="100vh" justifyContent="unset">
         <StyledHeaderContainer>
           <Header
-            portalId="portal"
-            navigation={navigationConfig}
             logoURL={renderLogo(user.operator.logo)}
             userName={user.username}
             client={user.company}
@@ -107,15 +101,6 @@ function AppPage() {
           )}
           <StyledContainer>
             <Grid templateColumns="1fr" alignContent="unset">
-              {!"1fr" && (
-                <StyledContainerNav>
-                  <Nav
-                    navigation={navigationConfig}
-                    logoutPath={logoutConfig.logoutPath}
-                    logoutTitle={logoutConfig.logoutTitle}
-                  />
-                </StyledContainerNav>
-              )}
               <StyledMain>
                 <Outlet />
               </StyledMain>

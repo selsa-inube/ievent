@@ -46,32 +46,4 @@ const appsConfig = [
   },
 ];
 
-const navigationConfig = {
-  title: "MENU",
-  sections: {
-    administrate: {
-      name: "Administrate",
-      links: {
-        privileges: {
-          id: "privileges",
-          label: "Privilegios",
-          icon: <MdVpnKey />,
-          path: "/privileges",
-        },
-        people: {
-          id: "people",
-          label: "Personas",
-          icon: <MdPerson />,
-          path: "/people",
-        },
-      },
-    },
-  },
-};
-
-const logoutConfig = {
-  logoutPath: "/logout",
-  logoutTitle: "Cerrar sesión",
-};
-
-export { appsConfig, navigationConfig, logoutConfig };
+export { appsConfig };

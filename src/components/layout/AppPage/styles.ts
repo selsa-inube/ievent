@@ -32,10 +32,6 @@ const StyledHeaderContainer = styled.div`
   }
 `;
 
-const StyledContainerNav = styled.div`
-  max-height: calc(100vh - 50px);
-`;
-
 const StyledMenuContainer = styled.div`
   position: absolute;
   top: 48px;
@@ -49,9 +45,9 @@ const StyledMenuContainer = styled.div`
   background-color: ${({ theme }) =>
     theme?.palette?.neutral?.N0 || inube.palette.neutral.N0};
 
-  hr{
+  hr {
     color: ${({ theme }) =>
-    theme?.palette?.neutral?.N40 || inube.palette.neutral.N40};
+      theme?.palette?.neutral?.N40 || inube.palette.neutral.N40};
   }
 `;
 
@@ -62,8 +58,5 @@ export {
   StyledContentImg,
   StyledLogo,
   StyledMain,
-  StyledContainerNav,
-  StyledHeaderContainer
-}
-
-
+  StyledHeaderContainer,
+};
