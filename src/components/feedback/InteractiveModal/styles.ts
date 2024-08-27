@@ -7,10 +7,6 @@ interface IStyledModal {
 
 const StyledContainer = styled.div`
   position: relative;
-
-  div {
-    z-index: 3;
-  }
 `;
 
 const StyledModal = styled.div<IStyledModal>`
