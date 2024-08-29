@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect, useRef } from "react";
 import { Outlet } from "react-router-dom";
-import { MdLogout, MdOutlineChevronRight  } from "react-icons/md";
+import { MdLogout, MdOutlineChevronRight } from "react-icons/md";
 import { Grid } from "@inubekit/grid";
 import { Header } from "@inubekit/header";
 import { Nav } from "@inubekit/nav";
@@ -25,7 +25,8 @@ import {
   StyledMenuContainer,
   StyledContainerNav,
   StyledHeaderContainer,
-  StyledCollapseIcon
+  StyledCollapseIcon,
+  StyledCollapse,
 } from "./styles";
 
 const renderLogo = (imgUrl: string) => {
@@ -42,6 +43,8 @@ function AppPage() {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [collapse, setCollapse] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
+  const collapseMenuRef = useRef<HTMLDivElement>(null);
+  const businessUnitChangeRef = useRef<HTMLDivElement>(null);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -50,6 +53,16 @@ function AppPage() {
       event.target !== userMenuRef.current
     ) {
       setShowUserMenu(false);
+    }
+
+    if (
+      collapseMenuRef.current &&
+      !collapseMenuRef.current.contains(event.target as Node) &&
+      event.target !== collapseMenuRef.current &&
+      businessUnitChangeRef.current &&
+      !businessUnitChangeRef.current.contains(event.target as Node)
+    ) {
+      setCollapse(false);
     }
   };
 
@@ -86,15 +99,24 @@ function AppPage() {
             client={user.company}
           />
         </StyledHeaderContainer>
-        <StyledCollapseIcon $collapse={collapse} onClick={() =>  setCollapse(!collapse)} $isTablet={isTablet}>
-            <Icon
-              icon={<MdOutlineChevronRight />}
-              appearance="primary"
-              size="20px"
-              cursorHover
-            />
-          </StyledCollapseIcon>
-        {collapse && <BusinessUnitChange clients={clientsDataMock}/>}
+        <StyledCollapseIcon
+          $collapse={collapse}
+          onClick={() =>  setCollapse(!collapse)}
+          $isTablet={isTablet}
+          ref={collapseMenuRef}
+        >
+          <Icon
+            icon={<MdOutlineChevronRight />}
+            appearance="primary"
+            size="24px"
+            cursorHover
+          />
+        </StyledCollapseIcon>
+        {collapse && (
+          <StyledCollapse ref={businessUnitChangeRef}>
+            <BusinessUnitChange clients={clientsDataMock} />
+          </StyledCollapse>
+        )}
         <StyledContainer>
           {showUserMenu && (
             <StyledMenuContainer ref={userMenuRef}>

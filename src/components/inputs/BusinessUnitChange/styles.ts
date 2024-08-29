@@ -36,7 +36,7 @@ export const StyledImg = styled.img`
 
 export const StyledHr = styled.hr`
   position: relative;
-  right: 20px;
+  right: 25px;
   width: 115%;
   border: 0;
   border-top: 2px solid;
