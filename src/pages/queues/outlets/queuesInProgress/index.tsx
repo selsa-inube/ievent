@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 import { queuesInProgressForUser } from "@services/getQueuesInProgress";
 import {
@@ -25,46 +24,20 @@ function QueuesInProgress() {
   });
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const navigate = useNavigate();
-
   const handleOrderData = () => {
     setOrderAscending(!orderAscending);
     orderData(queues, orderAscending);
     setQueues(queues);
   };
 
-  interface ResponseError extends Error {
-    response?: {
-      status: number;
-      statusText: string;
-    };
-  }
-
   const validateQueues = async () => {
     if (queues.length === 0) {
       setLoading(true);
       try {
-        const newQueues = await queuesInProgressForUser();
+        const newQueues = await queuesInProgressForUser(setErrorMessage);
         setQueues(newQueues);
       } catch (error) {
-        if (error instanceof Error) {
-          const responseError = error as ResponseError;
-          if (responseError.response) {
-            console.log(
-              `Error: ${responseError.response.status} - ${responseError.response.statusText}`
-            );
-            setErrorMessage(
-              `Error: ${responseError.response.status} - ${responseError.response.statusText}`
-            );
-          } else {
-            console.log("Error:", responseError.message);
-            setErrorMessage(responseError.message);
-          }
-        } else {
-          console.log("Unexpected error:", error);
-          setErrorMessage(`Unexpected error: ${error}`);
-        }
-        navigate("/service-error");
+        console.error("Error durante la validación de las colas:", error);
       } finally {
         setLoading(false);
       }

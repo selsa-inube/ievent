@@ -60,103 +60,101 @@ const InteractiveModalUI = (props: InteractiveModalUIProps) => {
 
   return createPortal(
     <>
-      {!discard && (
-        <StyledContainer>
-          <Blanket>
-            <StyledModal $smallScreen={isMobile}>
-              <Stack direction="column" gap="20px">
-                <Stack direction="column" gap="16px">
-                  <Stack direction="column" gap="8px">
-                    <Stack alignItems="center" justifyContent="space-between">
-                      <Text type="title" size="medium" appearance="dark">
-                        {title}
-                      </Text>
-                      <MdClear
-                        size={24}
-                        cursor="pointer"
-                        onClick={onCloseModal}
-                      />
-                    </Stack>
-
-                    <Text type="body" size="medium" appearance="gray">
-                      {infoTitle}
+      <StyledContainer>
+        <Blanket>
+          <StyledModal $smallScreen={isMobile}>
+            <Stack direction="column" gap="20px">
+              <Stack direction="column" gap="16px">
+                <Stack direction="column" gap="8px">
+                  <Stack alignItems="center" justifyContent="space-between">
+                    <Text type="title" size="medium" appearance="dark">
+                      {title}
                     </Text>
+                    <MdClear
+                      size={24}
+                      cursor="pointer"
+                      onClick={onCloseModal}
+                    />
                   </Stack>
 
-                  <Divider dashed />
+                  <Text type="body" size="medium" appearance="gray">
+                    {infoTitle}
+                  </Text>
+                </Stack>
 
-                  {labels.slice(0, 1).map(
-                    (field, id) =>
-                      infoData[field.id] && (
-                        <StyledModalFields key={id} $smallScreen={isMobile}>
-                          <Label
-                            htmlFor={field.id}
-                            size="small"
-                            margin="0px 0px 0px 16px"
-                          >
-                            {field.titleName}
-                          </Label>
-                          <Fieldset legend="" spacing="compact">
-                            <Text>{infoData[field.id]}</Text>
-                          </Fieldset>
-                        </StyledModalFields>
-                      )
-                  )}
-                  {labels.slice(1, 2).map(
-                    (field, id) =>
-                      infoData[field.id] && (
-                        <Stack key={id} gap="16px">
-                          <Label
-                            htmlFor={field.id}
-                            size="small"
-                            margin="0px 0px 0px 16px"
-                          >
-                            {field.titleName}
-                          </Label>
-                          <Stack>{infoData[field.id]}</Stack>
-                        </Stack>
-                      )
-                  )}
-                  {labels.slice(2).map(
-                    (field, id) =>
-                      infoData[field.id] && (
-                        <StyledModalFields key={id} $smallScreen={isMobile}>
-                          <Label
-                            htmlFor={field.id}
-                            size="small"
-                            margin="0px 0px 0px 16px"
-                          >
-                            {field.titleName}
-                          </Label>
-                          <Fieldset legend="" spacing="compact">
-                            <Text>{infoData[field.id]}</Text>
-                          </Fieldset>
-                        </StyledModalFields>
-                      )
-                  )}
-                </Stack>
-                <Stack gap="8px" justifyContent="flex-end">
-                  <Button
-                    spacing="wide"
-                    appearance="light"
-                    variant="filled"
-                    onClick={handleDiscardState}
-                  >
-                    Descartar
-                  </Button>
-                  <Button
-                    spacing="wide"
-                    onClick={handleReprocess}
-                    appearance="primary"
-                  >
-                    Reprocesar
-                  </Button>
-                </Stack>
+                <Divider dashed />
+
+                {labels.slice(0, 1).map(
+                  (field, id) =>
+                    infoData[field.id] && (
+                      <StyledModalFields key={id} $smallScreen={isMobile}>
+                        <Label
+                          htmlFor={field.id}
+                          size="small"
+                          margin="0px 0px 0px 16px"
+                        >
+                          {field.titleName}
+                        </Label>
+                        <Fieldset legend="" spacing="compact">
+                          <Text>{infoData[field.id]}</Text>
+                        </Fieldset>
+                      </StyledModalFields>
+                    )
+                )}
+                {labels.slice(1, 2).map(
+                  (field, id) =>
+                    infoData[field.id] && (
+                      <Stack key={id} gap="16px">
+                        <Label
+                          htmlFor={field.id}
+                          size="small"
+                          margin="0px 0px 0px 16px"
+                        >
+                          {field.titleName}
+                        </Label>
+                        <Stack>{infoData[field.id]}</Stack>
+                      </Stack>
+                    )
+                )}
+                {labels.slice(2).map(
+                  (field, id) =>
+                    infoData[field.id] && (
+                      <StyledModalFields key={id} $smallScreen={isMobile}>
+                        <Label
+                          htmlFor={field.id}
+                          size="small"
+                          margin="0px 0px 0px 16px"
+                        >
+                          {field.titleName}
+                        </Label>
+                        <Fieldset legend="" spacing="compact">
+                          <Text>{infoData[field.id]}</Text>
+                        </Fieldset>
+                      </StyledModalFields>
+                    )
+                )}
               </Stack>
-            </StyledModal>
-          </Blanket>
-        </StyledContainer>
-      )}
+              <Stack gap="8px" justifyContent="flex-end">
+                <Button
+                  spacing="wide"
+                  appearance="light"
+                  variant="filled"
+                  onClick={handleDiscardState}
+                >
+                  Descartar
+                </Button>
+                <Button
+                  spacing="wide"
+                  onClick={handleReprocess}
+                  appearance="primary"
+                >
+                  Reprocesar
+                </Button>
+              </Stack>
+            </Stack>
+          </StyledModal>
+        </Blanket>
+      </StyledContainer>
       {discard && (
         <DiscardModal
           portalId="portal"
