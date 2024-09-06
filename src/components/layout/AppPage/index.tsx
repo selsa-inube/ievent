@@ -2,8 +2,7 @@ import { useContext, useState, useEffect, useRef } from "react";
 import { Outlet } from "react-router-dom";
 import { MdLogout, MdOutlineChevronRight } from "react-icons/md";
 import { Grid } from "@inubekit/grid";
-import { Header } from "@inubekit/header";
-import { Nav } from "@inubekit/nav";
+import { Header } from "@components/navigation/header";
 import { Icon } from "@inubekit/icon";
 import { useMediaQuery } from "@inubekit/hooks";
 
@@ -14,8 +13,6 @@ import { LogoutModal } from "@components/feedback/LogoutModal";
 import { BusinessUnitChange } from "@components/inputs/BusinessUnitChange";
 import { clientsDataMock } from "@mocks/login/clients.mock";
 
-import { navigationConfig, logoutConfig } from "./config/apps.config";
-
 import {
   StyledAppPage,
   StyledContainer,
@@ -23,7 +20,6 @@ import {
   StyledLogo,
   StyledMain,
   StyledMenuContainer,
-  StyledContainerNav,
   StyledHeaderContainer,
   StyledCollapseIcon,
   StyledCollapse,
@@ -92,8 +88,6 @@ function AppPage() {
       <Grid templateRows="auto 1fr" height="100vh" justifyContent="unset">
         <StyledHeaderContainer>
           <Header
-            portalId="portal"
-            navigation={navigationConfig}
             logoURL={renderLogo(user.operator.logo)}
             userName={user.username}
             client={user.company}
@@ -101,7 +95,7 @@ function AppPage() {
         </StyledHeaderContainer>
         <StyledCollapseIcon
           $collapse={collapse}
-          onClick={() =>  setCollapse(!collapse)}
+          onClick={() => setCollapse(!collapse)}
           $isTablet={isTablet}
           ref={collapseMenuRef}
         >
@@ -146,15 +140,6 @@ function AppPage() {
           )}
           <StyledContainer>
             <Grid templateColumns="1fr" alignContent="unset">
-              {!"1fr" && (
-                <StyledContainerNav>
-                  <Nav
-                    navigation={navigationConfig}
-                    logoutPath={logoutConfig.logoutPath}
-                    logoutTitle={logoutConfig.logoutTitle}
-                  />
-                </StyledContainerNav>
-              )}
               <StyledMain>
                 <Outlet />
               </StyledMain>
