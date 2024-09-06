@@ -2,6 +2,11 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { inube } from "@inubekit/foundations";
 
+interface IStyledCollapseIcon {
+  $collapse: boolean;
+  $isTablet: boolean;
+}
+
 const StyledAppPage = styled.div`
   display: inherit;
   box-sizing: border-box;
@@ -23,7 +28,7 @@ const StyledContentImg = styled(Link)`
 `;
 
 const StyledLogo = styled.img`
-  max-width: 100px;
+  max-width: 120px;
 `;
 
 const StyledHeaderContainer = styled.div`
@@ -34,6 +39,16 @@ const StyledHeaderContainer = styled.div`
 
 const StyledContainerNav = styled.div`
   max-height: calc(100vh - 50px);
+`;
+
+const StyledCollapseIcon = styled.div<IStyledCollapseIcon>`
+  display: flex;
+  transition: all 500ms ease;
+  position: absolute;
+  top: ${({ $isTablet }) => ($isTablet ? "8.5px" : "13px")};
+  transform: ${({ $collapse }) =>
+    $collapse ? "rotate(-90deg)" : "rotate(90deg)"};
+  left: ${({ $isTablet }) => ($isTablet ? "200px" : "160px")};
 `;
 
 const StyledMenuContainer = styled.div`
@@ -49,10 +64,14 @@ const StyledMenuContainer = styled.div`
   background-color: ${({ theme }) =>
     theme?.palette?.neutral?.N0 || inube.palette.neutral.N0};
 
-  hr{
+  hr {
     color: ${({ theme }) =>
-    theme?.palette?.neutral?.N40 || inube.palette.neutral.N40};
+      theme?.palette?.neutral?.N40 || inube.palette.neutral.N40};
   }
+`;
+
+const StyledCollapse = styled.div`
+  position: absolute;
 `;
 
 export {
@@ -63,7 +82,7 @@ export {
   StyledLogo,
   StyledMain,
   StyledContainerNav,
-  StyledHeaderContainer
-}
-
-
+  StyledHeaderContainer,
+  StyledCollapseIcon,
+  StyledCollapse,
+};

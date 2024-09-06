@@ -18,7 +18,8 @@ export default function AppContextProvider(props: AppContextProviderProps) {
     localStorage.getItem("clientSigla") || ""
   );
 
-  const[clientLogo, setClientLogo] = useState<string>(linparLogo);
+  const initialClientLogo = localStorage.getItem("clientLogo") || linparLogo;
+  const[clientLogo, setClientLogo] = useState<string>(initialClientLogo);
   
   function handleClientChange(client: IClient) {
     const { sigla, logo } = client;
